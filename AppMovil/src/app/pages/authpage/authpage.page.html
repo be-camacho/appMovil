@@ -1,0 +1,17 @@
+<ion-content [fullscreen]="true">
+    <ion-title>Bienvenido</ion-title>
+  <div class="img">
+    <ion-img id="user" src="assets/user.png"/>
+  </div>
+  <div class="container-text">
+    <p>Si ya tienes cuenta inicia sesión</p>
+    <p>o</p>
+    <p>forma parte de nosotros regístrandote</p>
+  </div>
+
+  <div class="container-button">
+    <ion-button [routerLink]="['/login']">iniciar sesión</ion-button>
+
+    <ion-button [routerLink]="['/register']">Regístrate</ion-button>
+  </div>
+</ion-content>
