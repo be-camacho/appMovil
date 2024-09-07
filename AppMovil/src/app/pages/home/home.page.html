@@ -1,9 +1,13 @@
 <ion-content [fullscreen]="true">
-  <div class="container"> 
-    <ion-img src="assets/cerebro-gymbro.png"/>
-    <ion-title>El conocimiento es poder</ion-title>
+
+  <div class="img">
+    <ion-img class="brain" src="assets/cerebro-gymbro.png"/>
+  </div>
+
+  <div class="container"><!--contenedor del header-->
+    <ion-title class="title">El conocimiento es poder</ion-title>
     <br> 
-    <ion-text>Tu potencial es infinito, atrévete a explorarlo.</ion-text>
+    <ion-text class="subTitle">Tu potencial es infinito, atrévete a explorarlo.</ion-text>
   </div>
 
   <ion-fab vertical="bottom" horizontal="end" style="margin-bottom:30px;">
@@ -11,4 +15,5 @@
       <ion-icon name="chevron-forward"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+  
 </ion-content>

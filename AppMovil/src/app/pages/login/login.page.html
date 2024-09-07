@@ -1,21 +1,36 @@
 <ion-content [fullscreen]="true">
-  <div>
-    <ion-title>Bienvenido</ion-title>
-    <p>inicia sesión para comenzar</p>
+  <div class="header"><!--contenedor del header-->
+    <ion-title class="title">Bienvenido</ion-title>
+    <p class="subTitle">inicia sesión para comenzar</p>
   </div>
-  <form>
-    <div class="ion-padding">
-      <ion-item>
-        <ion-input></ion-input>
+
+  <form><!--form de inicio de sesion//-->
+    <div class="ion-padding"><!--contenedor de los imout del form que alinea el contenido-->
+
+      <ion-item><!--input de usuario-->
+        <ion-input placeholder="Usuario" class="input"></ion-input>
         <ion-icon name="person-outline"></ion-icon>
       </ion-item>
-      <ion-item>
-        <ion-input></ion-input>
+      <ion-item><!--input de contraseña-->
+        <ion-input placeholder="Contraseña" class="input"></ion-input>
         <ion-icon name="lock-closed-outline"></ion-icon>
       </ion-item>
+    
+
+      <div class="forgotPassword"><!--contenedor del link de olvido de contraseña-->
+        <a [routerLink]="['/forgotpassword']" style="color:#FFC33F">¿Olvidaste tu contraseña?</a>
+      </div>
+
+      <div class="singupLink"><!--redireccion a el login si ya tiene cuenta-->
+        <p> ¿No tienes una cuenta?<a [routerLink]="['/register']" style="color:#FFC33F"> Registrate</a></p>
+      </div>
+
     </div>
-    <div>
-      <a [routerLink]="['/forgotpassword']">¿Olvidaste tu contraseña?</a>
-    </div>
+    <ion-fab vertical="bottom" horizontal="end" style="margin-bottom:30px;"><!--boton que redireciona al menu-->
+      <ion-fab-button [routerLink]="['/mainmenu']">
+        <ion-icon name="chevron-forward"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
   </form>
 </ion-content>
