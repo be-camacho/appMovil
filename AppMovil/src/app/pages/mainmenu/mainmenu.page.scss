@@ -1,0 +1,39 @@
+.container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.startButton{
+    display: inline-block;
+    margin: 25px 0px;
+    text-decoration: none;
+    border-radius: 100%;
+    background-color: black;
+    
+    
+    position: relative;
+}
+.startButton {
+    background: none;
+    width: 150px;
+    height: 150px;
+    border: solid 5px black;
+    border-radius: 100%;
+    position: relative; 
+    text-indent:-9999px;
+    box-shadow: 1px 1px 3px #999999;
+  }
+  
+.startButton span {
+    width: 0;
+    height: 0;
+    border-top: 35px solid transparent;
+    border-left: 60px solid black;
+    border-bottom: 35px solid transparent;
+    position:absolute;
+    top:26%;
+    left:38%;    
+  }
+  
