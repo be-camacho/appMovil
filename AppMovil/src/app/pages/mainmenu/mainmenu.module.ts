@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import { SharedModule } from 'src/app/SharedModule/shared.module';
 import { IonicModule } from '@ionic/angular';
 
 import { MainmenuPageRoutingModule } from './mainmenu-routing.module';
@@ -13,7 +13,8 @@ import { MainmenuPage } from './mainmenu.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    MainmenuPageRoutingModule
+    MainmenuPageRoutingModule,
+    SharedModule
   ],
   declarations: [MainmenuPage]
 })

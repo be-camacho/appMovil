@@ -1,12 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit, ViewChild } from '@angular/core';
+import { BackgroundAnimationComponent  } from 'src/app/animated-background/animated-background.component';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements AfterViewInit {
+  @ViewChild(BackgroundAnimationComponent ) animatedBackground!: BackgroundAnimationComponent ;
+  constructor() { }
 
-  constructor() {}
+  ngOnInit() {
+  }
+  ngAfterViewInit(){    
+  }
 
 }

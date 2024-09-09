@@ -1,33 +1,34 @@
 <ion-content [fullscreen]="true">
+  <app-animated-background></app-animated-background>
   <div class="header"><!--contenedor del header-->
     <ion-title class="title">Bienvenido</ion-title>
     <p class="subTitle">inicia sesión para comenzar</p>
   </div>
-    <div class="ion-padding"><!--contenedor de los imout del form que alinea el contenido-->
 
-      <ion-item><!--input de usuario-->
-        <ion-input placeholder="Usuario" class="input" [(ngModel)]="login.user"></ion-input>
-        <ion-icon name="person-outline"></ion-icon>
-      </ion-item>
-      <ion-item><!--input de contraseña-->
-        <ion-input placeholder="Contraseña" class="input" type="password" [(ngModel)]="login.password"></ion-input>
-        <ion-icon name="lock-closed-outline"></ion-icon>
-      </ion-item>
+  <div class="ion-padding"><!--contenedor de los imput del form que alinea el contenido-->
+
+    <ion-item><!--input de usuario-->
+      <ion-input placeholder="Usuario" class="input" [(ngModel)]="login.user" style="color:grey"></ion-input>
+      <ion-icon name="person-outline" style="color:grey"></ion-icon>
+    </ion-item>
+    <ion-item><!--input de contraseña-->
+      <ion-input placeholder="Contraseña" class="input" type="password" [(ngModel)]="login.password" style="color:grey"></ion-input>
+      <ion-icon name="lock-closed-outline" style="color:grey"></ion-icon>
+    </ion-item>
     
 
-      <div class="forgotPassword"><!--contenedor del link de olvido de contraseña-->
-        <a [routerLink]="['/forgotpassword']" style="color:#FFC33F">¿Olvidaste tu contraseña?</a>
-      </div>
-
-      <div class="singupLink"><!--redireccion a el login si ya tiene cuenta-->
-        <p> ¿No tienes una cuenta?<a [routerLink]="['/register']" style="color:#FFC33F"> Registrate</a></p>
-      </div>
-
+    <div class="forgotPassword"><!--contenedor del link de olvido de contraseña-->
+      <a [routerLink]="['/forgotpassword']" style="color:#FFC33F">¿Olvidaste tu contraseña?</a>
     </div>
-    <ion-fab vertical="bottom" horizontal="end" style="margin-bottom:30px;"><!--boton que redireciona al menu-->
-      <ion-fab-button (click)="validateLogin()">
-        <ion-icon name="chevron-forward"></ion-icon>
-      </ion-fab-button>
-    </ion-fab>
+
+  </div>
+  <div class="singupLink"><!--redireccion a el login si ya tiene cuenta-->
+    <p> ¿No tienes una cuenta?<a [routerLink]="['/register']" style="color:#FFC33F"> Registrate</a></p>
+  </div>
+  <ion-fab vertical="bottom" horizontal="end" style="margin-bottom:5px;"><!--boton que redireciona al menu-->
+    <ion-fab-button (click)="validateLogin()">
+      <ion-icon name="chevron-forward"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
 </ion-content>
