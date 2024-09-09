@@ -3,16 +3,14 @@
     <ion-title class="title">Bienvenido</ion-title>
     <p class="subTitle">inicia sesión para comenzar</p>
   </div>
-
-  <form><!--form de inicio de sesion//-->
     <div class="ion-padding"><!--contenedor de los imout del form que alinea el contenido-->
 
       <ion-item><!--input de usuario-->
-        <ion-input placeholder="Usuario" class="input"></ion-input>
+        <ion-input placeholder="Usuario" class="input" [(ngModel)]="login.user"></ion-input>
         <ion-icon name="person-outline"></ion-icon>
       </ion-item>
       <ion-item><!--input de contraseña-->
-        <ion-input placeholder="Contraseña" class="input"></ion-input>
+        <ion-input placeholder="Contraseña" class="input" type="password" [(ngModel)]="login.password"></ion-input>
         <ion-icon name="lock-closed-outline"></ion-icon>
       </ion-item>
     
@@ -27,10 +25,9 @@
 
     </div>
     <ion-fab vertical="bottom" horizontal="end" style="margin-bottom:30px;"><!--boton que redireciona al menu-->
-      <ion-fab-button [routerLink]="['/mainmenu']">
+      <ion-fab-button (click)="validateLogin()">
         <ion-icon name="chevron-forward"></ion-icon>
       </ion-fab-button>
     </ion-fab>
 
-  </form>
 </ion-content>
