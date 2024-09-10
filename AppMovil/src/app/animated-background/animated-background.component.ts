@@ -7,9 +7,9 @@ import { Animation,AnimationController } from '@ionic/angular';
   styleUrls: ['./animated-background.component.scss']
 })
 export class BackgroundAnimationComponent implements OnInit {
-  @ViewChild('wave1', { static: true }) wave1!: ElementRef;
-  @ViewChild('wave2', { static: true }) wave2!: ElementRef;
-  @ViewChild('wave3', { static: true }) wave3!: ElementRef;
+  @ViewChild('wave1', { static: false }) wave1!: ElementRef;
+  @ViewChild('wave2', { static: false }) wave2!: ElementRef;
+  @ViewChild('wave3', { static: false }) wave3!: ElementRef;
 
   private animation!:Animation;
   constructor(private animationController: AnimationController) {}
@@ -55,5 +55,6 @@ export class BackgroundAnimationComponent implements OnInit {
       .iterations(Infinity)
       .addAnimation([animation1,animation2,animation3]);
       this.animation.play();
+      console.log("animacion llamada");
   }
 }

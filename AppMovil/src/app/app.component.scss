@@ -1,0 +1,6 @@
+/* app.component.scss */
+.page-content {
+    position: relative; /* Asegura que el contenido se superponga al fondo */
+    z-index: 1; /* Debe ser mayor que el índice z del fondo animado */
+  }
+  
