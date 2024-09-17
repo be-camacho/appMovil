@@ -55,6 +55,5 @@ export class BackgroundAnimationComponent implements OnInit {
       .iterations(Infinity)
       .addAnimation([animation1,animation2,animation3]);
       this.animation.play();
-      console.log("animacion llamada");
   }
 }
