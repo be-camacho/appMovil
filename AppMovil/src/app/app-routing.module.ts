@@ -22,7 +22,8 @@ const routes: Routes = [
   {
     path: 'mainmenu',
     loadChildren: () => import('./pages/mainmenu/mainmenu.module').then( m => m.MainmenuPageModule)
-  },  {
+  },
+  {
     path: 'authpage',
     loadChildren: () => import('./pages/authpage/authpage.module').then( m => m.AuthpagePageModule)
   },
@@ -30,6 +31,18 @@ const routes: Routes = [
     path: 'forgotpassword',
     loadChildren: () => import('./pages/forgotpassword/forgotpassword.module').then( m => m.ForgotpasswordPageModule)
   },
+  {
+    path: 'questionpage',
+    loadChildren: () => import('./pages/questionpage/questionpage.module').then( m => m.QuestionpagePageModule)
+  },  {
+    path: 'studythemepage',
+    loadChildren: () => import('./pages/studythemepage/studythemepage.module').then( m => m.StudythemepagePageModule)
+  },
+  {
+    path: 'subthemepage',
+    loadChildren: () => import('./pages/subthemepage/subthemepage.module').then( m => m.SubthemepagePageModule)
+  },
+
 
 ];
 
