@@ -29,9 +29,11 @@ svg{
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 999;
 }
 
 .startButton {
+    z-index: 999;
     background: none;
     width: 150px;
     height: 150px;
@@ -40,9 +42,10 @@ svg{
     position: relative; 
     text-indent:-9999px;
     box-shadow: 1px 1px 3px #999999;
-  }
+}
   
 .startButton span {
+    z-index: 999;
     width: 0;
     height: 0;
     border-top: 35px solid transparent;
@@ -51,5 +54,21 @@ svg{
     position:absolute;
     top:26%;
     left:38%;    
-  }
-  
+}
+
+ion-tab-bar{
+  --border:none;
+  --background:transparent;
+  height: 10%;
+}
+ion-tab-button{
+  --color:#ffffff;
+}
+ion-icon{
+  font-size: 30px;
+}
+ion-fab-button{
+  --background:transparent;
+  --box-shadow:none;
+  --transition:none;
+}

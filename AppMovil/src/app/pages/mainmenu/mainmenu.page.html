@@ -9,4 +9,24 @@
   <div class="container">
     <div class="startButton" [routerLink]="['/studythemepage']"><span>Play</span></div>
   </div>
+
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="home">
+        <ion-icon name="stats-chart-outline"></ion-icon>
+      </ion-tab-button>
+      <ion-tab-button tab="home">
+        <ion-icon name="home-outline"></ion-icon>
+      </ion-tab-button>
+      <ion-tab-button tab="add">
+        <ion-icon name="add-circle-outline"></ion-icon>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+  
+  <ion-fab vertical="top" horizontal="end" style="margin-top:10px; margin-right:10px;">
+    <ion-fab-button>
+      <ion-icon name="person-circle-outline" style="font-size: 60px;"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
