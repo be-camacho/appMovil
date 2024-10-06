@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { BackgroundAnimationComponent  } from 'src/app/animated-background/animated-background.component';
+import { BackgroundAnimationComponent  } from 'src/app/components/animated-background/animated-background.component';
 
 @Component({
   selector: 'app-forgotpassword',

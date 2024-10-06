@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { ForgotpasswordPageRoutingModule } from './forgotpassword-routing.module';
 import { ForgotpasswordPage } from './forgotpassword.page';
-import { SharedModule } from 'src/app/SharedModule/shared.module';
+import { SharedModule } from 'src/app/modules/SharedModule/shared.module';
 @NgModule({
   imports: [
     CommonModule,

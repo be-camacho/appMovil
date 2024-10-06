@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { QuestionpagePageRoutingModule } from './questionpage-routing.module';
 import { QuestionpagePage } from './questionpage.page';
-import { SharedModule } from 'src/app/SharedModule/shared.module';
+import { SharedModule } from 'src/app/modules/SharedModule/shared.module';
 
 @NgModule({
   imports: [

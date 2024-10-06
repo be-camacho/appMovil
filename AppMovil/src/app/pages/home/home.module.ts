@@ -4,7 +4,7 @@ import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 import { HomePageRoutingModule } from './home-routing.module';
-import { SharedModule } from 'src/app/SharedModule/shared.module';
+import { SharedModule } from 'src/app/modules/SharedModule/shared.module';
 @NgModule({
   imports: [
     CommonModule,
