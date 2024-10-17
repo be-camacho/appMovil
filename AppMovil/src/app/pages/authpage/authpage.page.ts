@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-authpage',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AuthpagePage implements OnInit {
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
   }

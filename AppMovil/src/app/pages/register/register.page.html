@@ -4,41 +4,67 @@
     <ion-title class="title">Bienvenido</ion-title>
     <p class="subTitle">Crea tu cuenta para ingresar</p>
   </div>
-
+  
+  <form [formGroup]="regForm" novalidate (ngSubmit)="register()"> 
     <div class="ion-padding">
 
       <ion-item><!--input de nombre-->
-        <ion-input class="input" placeholder="Nombre" style="color:grey"></ion-input>
-        <ion-icon name="person-outline"style="color:grey" ></ion-icon>
+        <ion-input formControlName="name" class="input" placeholder="Nombre" style="color:grey"></ion-input>
+        <ion-icon name="person-outline" style="color:grey"></ion-icon>
       </ion-item>
+
+      <div *ngIf="errorControl['name']?.invalid && (errorControl['name']?.touched || errorControl['name']?.dirty)">
+        <ion-text color="danger">
+          <p *ngIf="errorControl['name']?.errors?.required">El nombre es requerido.</p>
+        </ion-text>
+      </div>
 
       <ion-item><!--input de apellido-->
-        <ion-input class="input" placeholder="Apellido" style="color:grey"></ion-input>
+        <ion-input formControlName="lastname" class="input" placeholder="Apellido" style="color:grey"></ion-input>
         <ion-icon name="person-outline" style="color:grey"></ion-icon>
       </ion-item>
+
+      <div *ngIf="errorControl['lastname']?.invalid && (errorControl['lastname']?.touched || errorControl['lastname']?.dirty)">
+        <ion-text color="danger">
+          <p *ngIf="errorControl['lastname']?.errors?.required">El apellido es requerido.</p>
+        </ion-text>
+      </div>
 
       <ion-item><!--input de correo-->
-        <ion-input class="input" placeholder="Correo" style="color:grey"></ion-input>
+        <ion-input formControlName="email" class="input" placeholder="Correo" style="color:grey"></ion-input>
         <ion-icon name="person-outline" style="color:grey"></ion-icon>
       </ion-item>
 
+      <div *ngIf="errorControl['email']?.invalid && (errorControl['email']?.touched || errorControl['email']?.dirty)">
+        <ion-text color="danger">
+          <p *ngIf="errorControl['email']?.errors?.required">El correo es requerido.</p>
+          <p *ngIf="errorControl['email']?.errors?.email">El correo no es válido.</p>
+        </ion-text>
+      </div>
+
       <ion-item><!--input de contraseña-->
-        <ion-input class="input" placeholder="Contraseña" type="password" style="color:grey"></ion-input>
+        <ion-input formControlName="password" class="input" placeholder="Contraseña" type="password" style="color:grey"></ion-input>
         <ion-icon name="lock-closed-outline" style="color:grey"></ion-icon>
       </ion-item>
 
-      <ion-item><!--input de repita contraseña-->
-        <ion-input class="input" placeholder="Repita contraseña" type="password" style="color:grey"></ion-input>
-        <ion-icon name="lock-closed-outline" style="color:grey"></ion-icon>
-      </ion-item>
-    
-      <div class="singinLink">
-        <p> ¿Ya tienes cuenta?<a style="color:#FFC33F"[routerLink]="['/login']">Ingresa aqui</a></p>
+      <div *ngIf="errorControl['password']?.invalid && (errorControl['password']?.touched || errorControl['password']?.dirty)">
+        <ion-text color="danger">
+          <p *ngIf="errorControl['password']?.errors?.required">La contraseña es requerida.</p>
+          <p *ngIf="errorControl['password']?.errors?.pattern">La contraseña debe tener al menos 8 caracteres, incluir una letra mayúscula, una letra minúscula y un número.</p>
+        </ion-text>
       </div>
+      
+      <div class="singinLink">
+        <p> ¿Ya tienes cuenta?<a style="color:#FFC33F" [routerLink]="['/login']">Ingresa aquí</a></p>
+      </div>
+
     </div>
+
     <ion-fab vertical="bottom" horizontal="end" style="margin-bottom:5px;">
-      <ion-fab-button [routerLink]="['/login']">
+      <ion-fab-button (click)="register()">
         <ion-icon name="chevron-forward"></ion-icon>
       </ion-fab-button>
     </ion-fab>
+
+  </form>
 </ion-content>

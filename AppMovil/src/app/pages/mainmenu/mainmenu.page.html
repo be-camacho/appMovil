@@ -7,7 +7,7 @@
   </div>
 
   <div class="container">
-    <div class="startButton" [routerLink]="['/studythemepage']"><span>Play</span></div>
+    <div class="startButton"><span>Play</span></div>
   </div>
 
   <ion-tabs>
@@ -18,7 +18,7 @@
       <ion-tab-button tab="home">
         <ion-icon name="home-outline"></ion-icon>
       </ion-tab-button>
-      <ion-tab-button tab="add">
+      <ion-tab-button tab="add" [routerLink]="['/studythemepage']">
         <ion-icon name="add-circle-outline"></ion-icon>
       </ion-tab-button>
     </ion-tab-bar>

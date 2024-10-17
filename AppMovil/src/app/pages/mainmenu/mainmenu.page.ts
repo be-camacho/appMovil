@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-mainmenu',
@@ -10,7 +11,10 @@ export class MainmenuPage implements OnInit {
   user: string = '';
 
 
-  constructor(private router:Router) {
+  constructor(
+    private router:Router,
+    public auth:AuthService,
+  ) {
 
     const navigation = this.router.getCurrentNavigation();
     if(navigation?.extras.state){
@@ -21,5 +25,11 @@ export class MainmenuPage implements OnInit {
   }
 
   ngOnInit() {}
+
+  async logout() {
+    this.auth.logout().then(()=>{
+      this.router.navigate(['/home'])
+    })
+  }
 
 }

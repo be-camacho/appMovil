@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationExtras, Router } from '@angular/router';
-import { NavController, ToastController } from '@ionic/angular';
+import { FormBuilder,FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { LoadingController } from '@ionic/angular';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -8,47 +10,54 @@ import { NavController, ToastController } from '@ionic/angular';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit{
+  loginForm : FormGroup;
 
-login:any={
-  user:"",
-  password:""
-}
-field:string="";
-  constructor(public router: Router, public toastController: ToastController){}
+  constructor(
+    public formBuilder: FormBuilder,
+    public loadingCtrl: LoadingController,
+    public authService: AuthService,
+    public router: Router
+  ){}
 
   ngOnInit() {
-  }
-
-  validateLogin(){
-    if(this.validateModel(this.login)){
-      this.presentToast("top","bienvenid@")
-      let navigationExtras : NavigationExtras ={
-        state:{login : this.login}
-      };
-      this.router.navigate(['/mainmenu'],navigationExtras);
-    }else{
-      this.presentToast("middle","Error - falta: "+this.field,5000);
-    }
-  }
-
-  validateModel(model:any){
-    for(var[key,value] of Object.entries(model)){
-      if(value ==""){
-        this.field = key;
-        return false;
-      }
-    }
-    return true;
-  }
-
-  async presentToast(position: 'top'|'middle'|'bottom',msg:string,duration?:number){
-    const toast = await this.toastController.create({
-      message: msg,
-      duration: duration?duration:2500,
-      position: position
+    this.loginForm = this.formBuilder.group({
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.email,
+          Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$"),
+        ],
+      ],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern("(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"),
+        ],
+      ],
     });
-
-    await toast.present();
   }
 
+  get errorControl() {
+    return this.loginForm?.controls;
+  }
+
+  async login() {
+    const loading = await this.loadingCtrl.create();
+    await loading.present();
+    if(this.loginForm.valid) {
+      const user = await this.authService.loginUser(this.loginForm.value.email, this.loginForm.value.password).catch((error) => {
+        console.log(error);
+        loading.dismiss()
+      })
+
+      if(user){
+        loading.dismiss()
+        this.router.navigate(['/mainmenu'])
+      }else{
+        console.log('provide correct values')
+      }
+   }
+  }
 }
