@@ -8,21 +8,8 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./mainmenu.page.scss'],
 })
 export class MainmenuPage implements OnInit {
-  user: string = '';
-
-
-  constructor(
-    private router:Router,
-    public auth:AuthService,
-  ) {
-
-    const navigation = this.router.getCurrentNavigation();
-    if(navigation?.extras.state){
-      const state = navigation.extras.state as { login:{ user:string; password: string}};
-      this.user = state.login.user;
-    }
-
-  }
+  user: any;
+  constructor(private router:Router,public auth:AuthService,) {}
 
   ngOnInit() {}
 

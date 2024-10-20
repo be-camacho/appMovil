@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoadingController, ToastController } from '@ionic/angular';
+import { LoadingController } from '@ionic/angular';
+import { UserI } from 'src/app/models/users.models';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -12,6 +13,8 @@ import { AuthService } from 'src/app/services/auth.service';
 export class RegisterPage implements OnInit {
   regForm: FormGroup;
 
+  newUser: UserI;
+  
   constructor(
     public formBuilder: FormBuilder,
     private loadingCtrl: LoadingController,
@@ -55,11 +58,21 @@ export class RegisterPage implements OnInit {
       })
 
       if(user){
+        const token = (await this.authService.getProfile()).uid;
+        this.newUser = {
+          name: this.regForm.value.name,  
+          lastname: this.regForm.value.lastname,
+          email: this.regForm.value.email,
+          id: token
+        }
+        this.authService.createDocumentID(this.newUser, 'Users',this.newUser.id)
+        console.log(this.newUser)
         loading.dismiss()
         this.router.navigate(['/login'])
       }else{
         console.log('provide correct values')
+        
       }
-   }
+    }loading.dismiss()
   }
 }

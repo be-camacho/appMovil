@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserdataService } from 'src/app/services/userdata.service';
 @Component({
   selector: 'app-studythemepage',
   templateUrl: './studythemepage.page.html',
@@ -6,17 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StudythemepagePage implements OnInit {
 
-  items: string[] = [];
-  list: string[] = ["Ingles", "matematica"];
+  studythemes: string[] = [];
+
+  constructor(private userdataService : UserdataService){};
+
   ngOnInit() {
-    this.generateItems();
-  }
+    this.userdataService.getuserdata<string>('studythemes').subscribe((data) => {
+      if(data){
+        this.studythemes = data;
+      }
+  
+    });
 
-  private generateItems() {
-    const count = this.items.length + 1;
-    for (let i = 0; i < 15; i++) {
-      this.items.push(`tema ${count + i}`);
-    }
   }
-
 }
