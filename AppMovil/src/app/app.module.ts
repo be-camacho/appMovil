@@ -11,15 +11,32 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import {  provideFirestore } from '@angular/fire/firestore';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Firestore, doc, setDoc } from '@angular/fire/firestore';
 import { getFirestore } from 'firebase/firestore';
 import { initializeApp } from 'firebase/app';
+import { ThememodalComponent } from './components/thememodal/thememodal.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,SharedModule,AngularFireModule.initializeApp(environment.firebaseConfig),AngularFireAuthModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, provideFirebaseApp(() => initializeApp({"projectId":"datamobileapp-b2ace","appId":"1:20503300175:web:041f32b1b3e851156e423a","storageBucket":"datamobileapp-b2ace.appspot.com","apiKey":"AIzaSyCqyjrYSVarEOS6w-LhWDjQVpUlIpEQj68","authDomain":"datamobileapp-b2ace.firebaseapp.com","messagingSenderId":"20503300175"})), provideAuth(() => getAuth()), provideFirestore(() => getFirestore())],
+  declarations: [
+    AppComponent,
+    ThememodalComponent
+  ],
+  imports: [
+    BrowserModule, 
+    IonicModule.forRoot(), 
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    SharedModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule
+  ],
+  providers: [{ provide: RouteReuseStrategy, 
+    useClass: IonicRouteStrategy }, 
+    provideFirebaseApp(() => initializeApp({"projectId":"datamobileapp-b2ace","appId":"1:20503300175:web:041f32b1b3e851156e423a","storageBucket":"datamobileapp-b2ace.appspot.com","apiKey":"AIzaSyCqyjrYSVarEOS6w-LhWDjQVpUlIpEQj68","authDomain":"datamobileapp-b2ace.firebaseapp.com","messagingSenderId":"20503300175"})), 
+    provideAuth(() => getAuth()), 
+    provideFirestore(() => getFirestore())
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

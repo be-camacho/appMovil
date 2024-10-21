@@ -11,7 +11,7 @@ export class UserdataService {
 
   constructor() { }
 
-  getuserdata<tipo>(path: string){
+  getuserdata<tipo>(path: string,enlace:string){
     const userProfileCollection = collection(this.firestore, 'users');
     return collectionData(userProfileCollection) as Observable<tipo[]>;
   }

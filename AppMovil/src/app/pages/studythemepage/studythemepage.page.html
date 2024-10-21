@@ -5,11 +5,22 @@
       <div class="header">
         <ion-title>Temas de estudio</ion-title>
       </div>
-          <ion-list lines="none" class="question-list">
-            <ion-item *ngFor="let item of studythemes; let index">
-              <ion-button>{{ item }}</ion-button>
-            </ion-item>
-          </ion-list>
+      <ion-list lines="none" class="question-list">
+        <ion-item *ngFor="let item of studythemes; let index" (click)="onItemClick(item)">
+          <ion-button [ngClass]="{'edit-mode': editMode, 'delet-mode': deletMode}">{{ item.tname }}</ion-button>
+        </ion-item>
+      </ion-list>
+      <div class="button-group">
+        <ion-button (click)="openAddThemeModal()" class="icon-button">
+          <ion-icon name="add-circle-outline"></ion-icon>
+        </ion-button>
+        <ion-button (click)="toggleEditMode()" [ngClass]="{'edit-mode-button': editMode}" class="icon-button">
+          <ion-icon name="create-outline"></ion-icon> 
+        </ion-button>
+        <ion-button (click)="toggleDeletMode()" [ngClass]="{'delet-mode-button': deletMode}" class="icon-button">
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-button>
+      </div>
     </div>
   </div>
   <ion-tabs>

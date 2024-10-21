@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import firebase from 'firebase/compat/app';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Firestore,doc, setDoc } from 'firebase/firestore';
+import { Firestore,doc,setDoc,getDoc } from 'firebase/firestore';
 import { initializeApp } from 'firebase/app';
 import { environment } from '../../environments/environment';
 import { getFirestore } from 'firebase/firestore';
@@ -30,8 +29,9 @@ export class AuthService {
   async getProfile(){
     return await this.ngFireAuth.currentUser
   }
-  createDocumentID(data:any,enlace:string,idDoc:string){
-    const document = doc(this.firestore,`${ enlace }/${ idDoc }`);
-    return setDoc(document,data);
+  async getUserData(uid: string) {
+    const userDoc = doc(this.firestore, `Users/${uid}`);
+    const userSnapshot = await getDoc(userDoc);
+    return userSnapshot.exists() ? userSnapshot.data() : null;
   }
 }

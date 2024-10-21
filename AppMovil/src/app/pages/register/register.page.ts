@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 import { UserI } from 'src/app/models/users.models';
 import { AuthService } from 'src/app/services/auth.service';
+import { FirebaseService } from 'src/app/services/firebase.service';
 
 @Component({
   selector: 'app-register',
@@ -11,6 +12,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
+
   regForm: FormGroup;
 
   newUser: UserI;
@@ -19,6 +21,7 @@ export class RegisterPage implements OnInit {
     public formBuilder: FormBuilder,
     private loadingCtrl: LoadingController,
     private authService: AuthService,
+    private firesbaseservice: FirebaseService,
     public router: Router
   ) {}
 
@@ -51,22 +54,21 @@ export class RegisterPage implements OnInit {
   async register() {
     const loading = await this.loadingCtrl.create();
     await loading.present();
-    if(this.regForm.valid) {
+    if(this.regForm.valid) {//si el formulario es valido registra el usuario en firebase authentication
       const user = await this.authService.registerUser(this.regForm.value.email, this.regForm.value.password).catch((error) => {
         console.log(error);
         loading.dismiss()
       })
 
-      if(user){
-        const token = (await this.authService.getProfile()).uid;
-        this.newUser = {
+      if(user){//si se logro crear ese usuario 
+        const token = (await this.authService.getProfile()).uid;//guarda el uid en una constante
+        this.newUser = { //inicializa el objeto newUser con los valores del formulario y el uid
           name: this.regForm.value.name,  
           lastname: this.regForm.value.lastname,
           email: this.regForm.value.email,
           id: token
         }
-        this.authService.createDocumentID(this.newUser, 'Users',this.newUser.id)
-        console.log(this.newUser)
+        this.firesbaseservice.createDocumentID(this.newUser, 'Users',this.newUser.id)//crea el usuario nuevo en la colección Users de firestore
         loading.dismiss()
         this.router.navigate(['/login'])
       }else{

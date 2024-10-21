@@ -64,3 +64,28 @@ ion-tab-button{
 ion-icon{
   font-size: 30px;
 }
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.button-group ion-button.icon-button {
+  --box-shadow: none;
+  flex: 1;
+  margin: 0 5px;
+  background-color: transparent;
+  --background: transparent;
+  --border: none;
+  --color: #ffffff;
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.button-group ion-button.icon-button ion-icon {
+  font-size: 25px;
+}
