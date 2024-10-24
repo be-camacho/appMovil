@@ -61,12 +61,12 @@ export class RegisterPage implements OnInit {
       })
 
       if(user){//si se logro crear ese usuario 
-        const token = (await this.authService.getProfile()).uid;//guarda el uid en una constante
+        const iud = (await this.authService.getProfile()).uid;//guarda el uid en una constante
         this.newUser = { //inicializa el objeto newUser con los valores del formulario y el uid
           name: this.regForm.value.name,  
           lastname: this.regForm.value.lastname,
           email: this.regForm.value.email,
-          id: token
+          id: iud
         }
         this.firesbaseservice.createDocumentID(this.newUser, 'Users',this.newUser.id)//crea el usuario nuevo en la colección Users de firestore
         loading.dismiss()

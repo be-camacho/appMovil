@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   {
@@ -21,7 +22,8 @@ const routes: Routes = [
   },
   {
     path: 'mainmenu',
-    loadChildren: () => import('./pages/mainmenu/mainmenu.module').then( m => m.MainmenuPageModule)
+    loadChildren: () => import('./pages/mainmenu/mainmenu.module').then( m => m.MainmenuPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'authpage',
@@ -33,14 +35,18 @@ const routes: Routes = [
   },
   {
     path: 'questionpage',
-    loadChildren: () => import('./pages/questionpage/questionpage.module').then( m => m.QuestionpagePageModule)
-  },  {
+    loadChildren: () => import('./pages/questionpage/questionpage.module').then( m => m.QuestionpagePageModule),
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'studythemepage',
-    loadChildren: () => import('./pages/studythemepage/studythemepage.module').then( m => m.StudythemepagePageModule)
+    loadChildren: () => import('./pages/studythemepage/studythemepage.module').then( m => m.StudythemepagePageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'subthemepage',
-    loadChildren: () => import('./pages/subthemepage/subthemepage.module').then( m => m.SubthemepagePageModule)
+    loadChildren: () => import('./pages/subthemepage/subthemepage.module').then( m => m.SubthemepagePageModule),
+    canActivate: [AuthGuard]
   },
 
 

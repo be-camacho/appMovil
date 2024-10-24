@@ -2,7 +2,7 @@
 <ion-content [fullscreen]="true">
   <app-animated-background></app-animated-background>
   <div class="header"><!--contenedor del header-->
-    <ion-title class="title">Bienvenido {{ user.name }}</ion-title>
+    <ion-title class="title">Bienvenido {{ user?.name }}</ion-title>
     <p class="subTitle">presiona el boton de play para comenzar</p>
   </div>
 
@@ -12,21 +12,22 @@
 
   <ion-tabs>
     <ion-tab-bar slot="bottom">
-      <ion-tab-button tab="home">
+      <ion-tab-button>
         <ion-icon name="stats-chart-outline"></ion-icon>
       </ion-tab-button>
-      <ion-tab-button tab="home">
+      <ion-tab-button>
         <ion-icon name="home-outline"></ion-icon>
       </ion-tab-button>
-      <ion-tab-button tab="add" [routerLink]="['/studythemepage']">
+      <ion-tab-button [routerLink]="['/studythemepage']">
         <ion-icon name="add-circle-outline"></ion-icon>
       </ion-tab-button>
     </ion-tab-bar>
   </ion-tabs>
   
   <ion-fab vertical="top" horizontal="end" style="margin-top:10px; margin-right:10px;">
-    <ion-fab-button>
+    <ion-fab-button (click)="logout()">
       <ion-icon name="person-circle-outline" style="font-size: 60px;"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+
 </ion-content>

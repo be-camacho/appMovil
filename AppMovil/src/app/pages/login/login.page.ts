@@ -54,6 +54,9 @@ export class LoginPage implements OnInit{
 
       if(user){
         loading.dismiss()
+        user.user.getIdToken().then((token) => {
+          localStorage.setItem('authToken', token);
+        });
         this.router.navigate(['/mainmenu'])
       }else{
         console.log('provide correct values')

@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { UserI } from 'src/app/models/users.models';
 import { AuthService } from 'src/app/services/auth.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
-import { UserdataService } from 'src/app/services/userdata.service';
 
 @Component({
   selector: 'app-mainmenu',
@@ -29,6 +28,7 @@ export class MainmenuPage implements OnInit {
   async logout() {
     this.auth.logout().then(()=>{
       this.router.navigate(['/home'])
+      console.log('Sesión cerrada');
     })
   }
 
