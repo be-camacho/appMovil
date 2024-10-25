@@ -10,6 +10,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class ThememodalComponent implements OnInit {
   @Input() title: string;
   @Input() buttonText: string;
+  @Input() inputname: string;
   @Input() themeName: string;
   themeForm: FormGroup;
 

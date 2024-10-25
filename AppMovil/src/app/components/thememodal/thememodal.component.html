@@ -9,7 +9,7 @@
 <ion-content>
   <form [formGroup]="themeForm" (ngSubmit)="submit()">
     <ion-item>
-      <ion-label position="floating">Nombre del Tema</ion-label>
+      <ion-label position="floating">{{inputname}}</ion-label>
       <ion-input formControlName="themeName"></ion-input>
     </ion-item>
     <ion-button expand="full" type="submit" [disabled]="!themeForm.valid">{{ buttonText }}</ion-button>

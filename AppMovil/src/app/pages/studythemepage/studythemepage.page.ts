@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
@@ -51,6 +51,7 @@ export class StudythemepagePage implements OnInit {
       componentProps: {
       title: 'Crear un nuevo Tema de Estudio',
       buttonText: 'Crear',
+      inputname: 'Nombre del tema',
       themeName: ''
       }
     });
@@ -67,6 +68,7 @@ export class StudythemepagePage implements OnInit {
       componentProps: {
         title: 'Modificar Tema de Estudio',
         buttonText: 'Guardar cambios',
+        inputname: 'Nombre del tema',
         themeName: theme.tname
       }
     });
@@ -113,7 +115,7 @@ export class StudythemepagePage implements OnInit {
     }else if(this.deletMode){
       this.deleteTheme(item);
     }else{
-      this.router.navigate(['/subthemepage'])
+      this.router.navigate(['/subthemepage', { item: JSON.stringify(item) }]);
     }
   }
 

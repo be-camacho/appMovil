@@ -6,18 +6,18 @@
         <ion-title>Unidades</ion-title>
       </div>
           <ion-list lines="none" class="question-list">
-            <ion-item *ngFor="let item of items; let index">
-              <ion-button>{{ item }}</ion-button>
+            <ion-item *ngFor="let item of subthemes; let index"(click)="onItemClick(item)">
+              <ion-button [ngClass]="{'edit-mode': editMode, 'delet-mode': deletMode}">{{ item.subtname }}</ion-button>
             </ion-item>
           </ion-list>
           <div class="button-group">
-            <ion-button class="icon-button">
+            <ion-button (click)="openAddSubThemeModal()" class="icon-button">
               <ion-icon name="add-circle-outline"></ion-icon>
             </ion-button>
-            <ion-button class="icon-button">
+            <ion-button (click)="toggleEditMode()" class="icon-button">
               <ion-icon name="create-outline"></ion-icon>
             </ion-button>
-            <ion-button class="icon-button">
+            <ion-button (click)="toggleDeletMode()" class="icon-button">
               <ion-icon name="trash-outline"></ion-icon>
             </ion-button>
           </div>

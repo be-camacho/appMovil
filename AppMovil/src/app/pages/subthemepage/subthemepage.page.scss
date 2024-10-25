@@ -89,3 +89,43 @@ ion-icon{
 .button-group ion-button.icon-button ion-icon {
   font-size: 25px;
 }
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+  }
+  
+  .button-group ion-button.icon-button {
+    --box-shadow: none;
+    flex: 1;
+    margin: 0 5px;
+    background-color: transparent;
+    --background: transparent;
+    --border: none;
+    --color: #ffffff;
+    --padding-start: 0;
+    --padding-end: 0;
+    --padding-top: 0;
+    --padding-bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .button-group ion-button.icon-button ion-icon {
+    font-size: 25px;
+  }
+  .button-group ion-button.edit-mode-button {
+    color: green; /* Cambia el color del icono a verde en modo de edición */
+  }
+  
+  .question-list ion-button.edit-mode {
+    border: 2px solid yellow; /* Cambia el borde a amarillo en modo de edición */
+  }
+
+  .button-group ion-button.delet-mode-button {
+    color: red; /* Cambia el color del icono a verde en modo de eliminar */
+  }
+  
+  .question-list ion-button.delet-mode {
+    border: 2px solid red; /* Cambia el borde a amarillo en modo de eliminar */
+  }
