@@ -8,6 +8,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { SubthemeI } from 'src/app/models/subtheme.models';
 import { AddQuestionModalComponent } from 'src/app/components/addquestionmodal/addquestionmodal.component';
+import { SQLiteService } from 'src/app/services/SQLite.service';
 
 @Component({
   selector: 'app-questionpage',
@@ -29,19 +30,24 @@ export class QuestionpagePage implements OnInit {
     private route: ActivatedRoute,
     private authService: AuthService,
     private firebaseService: FirebaseService,
-    private modalController: ModalController, 
+    private modalController: ModalController,
+    private sqliteService: SQLiteService
     ){
       
     }
 
   ngOnInit() {
     this.loadQuestions();
+    this.initializeDatabase();
     this.route.params.subscribe(params => {
       if (params['subTheme'] && params['studyTheme']) {
         this.selecteStudyTheme = JSON.parse(params['studyTheme']);
         this.selectedSubTheme = JSON.parse(params['subTheme']);
       }
     });
+  }
+  async initializeDatabase() {
+    await this.sqliteService.initializeDatabase();
   }
 
   async loadQuestions() {
@@ -69,10 +75,11 @@ export class QuestionpagePage implements OnInit {
           note: question['note'],
           question: question['question'],
           answers: question['answers'],
-          imagecod: question['image'],
+          imagecod: question['image'] || null,
           id: this.firebaseService.createIdDoc(),
         };
         await this.firebaseService.createDocumentID(newQuestion, `Users/${uid}/studythemes/${tuid}/subthemes/${suid}/questions`, newQuestion.id);
+        await this.sqliteService.addQuestionImage(newQuestion.id, newQuestion.imagecod); // Guardar en SQLite
       }
     }
   }
@@ -88,10 +95,11 @@ export class QuestionpagePage implements OnInit {
         note: question['note'],
         question: question['question'],
         answers: question['answers'],
-        imagecod: question['image'] || null, // Asegúrate de que imagecod no sea undefined
+        imagecod: question['image'] || null,
         id: id
       };
       await this.firebaseService.createDocumentID(updatedQuestion, `Users/${uid}/studythemes/${tuid}/subthemes/${suid}/questions`, updatedQuestion.id);
+      await this.sqliteService.addQuestionImage(updatedQuestion.id, updatedQuestion.imagecod); // Guardar en SQLite
     }
   }
 

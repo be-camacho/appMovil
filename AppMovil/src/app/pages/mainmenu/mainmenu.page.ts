@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+import { PhotosComponent } from 'src/app/components/photos/photos.component';
 import { UserI } from 'src/app/models/users.models';
 import { AuthService } from 'src/app/services/auth.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
@@ -11,7 +13,11 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 })
 export class MainmenuPage implements OnInit {
   user: UserI;
-  constructor(private router:Router,public auth:AuthService, private firebaseService:FirebaseService) {}
+  constructor(
+    private router:Router,
+    public auth:AuthService, 
+    private firebaseService:FirebaseService,
+    private modalController: ModalController,) {}
 
   async ngOnInit() {
     const currentUser = await this.auth.getProfile();
@@ -31,5 +37,11 @@ export class MainmenuPage implements OnInit {
       console.log('Sesión cerrada');
     })
   }
-
+  async openPhotoModal() {
+    const modal = await this.modalController.create({
+      component: PhotosComponent,
+      componentProps: {}
+    });
+    return await modal.present();
+  }
 }
