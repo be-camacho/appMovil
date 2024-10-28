@@ -47,9 +47,11 @@ const routes: Routes = [
     path: 'subthemepage',
     loadChildren: () => import('./pages/subthemepage/subthemepage.module').then( m => m.SubthemepagePageModule),
     canActivate: [AuthGuard]
-  },  {
+  },
+  {
     path: 'timeofquestions',
-    loadChildren: () => import('./pages/timeofquestions/timeofquestions.module').then( m => m.TimeofquestionsPageModule)
+    loadChildren: () => import('./pages/timeofquestions/timeofquestions.module').then( m => m.TimeofquestionsPageModule),
+    canActivate: [AuthGuard]
   },
 
 

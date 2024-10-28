@@ -55,6 +55,7 @@ export class SubthemepagePage implements OnInit {
       }
     });
   }
+
   async openAddSubThemeModal() {
     const modal = await this.modalController.create({
       component: ThememodalComponent,
@@ -65,6 +66,7 @@ export class SubthemepagePage implements OnInit {
         themeName: ''
       }
     });
+
     modal.onDidDismiss().then((data) => {
       if (data.data) {
         this.addSubTheme(data.data.themeName);
@@ -72,6 +74,7 @@ export class SubthemepagePage implements OnInit {
     });
     return await modal.present();
   }
+  
   async openEditSubThemeModal(subTheme: SubthemeI) {
     const modal = await this.modalController.create({
       component: ThememodalComponent,
@@ -131,7 +134,10 @@ export class SubthemepagePage implements OnInit {
     } else if (this.deletMode) {
       this.deleteSubTheme(item);
     } else {
-      this.router.navigate(['/questionpage']);
+      this.router.navigate(['/questionpage',{ 
+        subTheme: JSON.stringify(item) ,
+        studyTheme: JSON.stringify(this.selecteStudyTheme) 
+      }]);
     }
   }
   toggleEditMode() {

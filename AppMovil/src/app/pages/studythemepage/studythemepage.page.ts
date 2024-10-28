@@ -90,6 +90,7 @@ export class StudythemepagePage implements OnInit {
       await this.firebaseService.createDocumentID(updatedTheme, `Users/${uid}/studythemes`, updatedTheme.id);
     }
   }
+  
   async addTheme(themeName: string) {
     if (themeName) {
       const currentUser = await this.authService.getProfile();

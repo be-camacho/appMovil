@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ title }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label>Tipo de Pregunta</ion-label>
+    <ion-select [(ngModel)]="questionData.questionType" (ionChange)="onQuestionTypeChange()">
+      <ion-select-option value="1">Pregunta de Alternativas</ion-select-option>
+      <ion-select-option value="2">Pregunta de Desarrollo</ion-select-option>
+      <ion-select-option value="3">Recordatorio</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <div *ngIf="questionType === '1'">
+    <ion-item>
+      <ion-label>Imagen</ion-label>
+      <input type="file" (change)="onFileSelected($event)">
+    </ion-item>
+    <ion-item>
+      <ion-label>Pregunta</ion-label>
+      <ion-input [(ngModel)]="questionData.question" placeholder="Ingrese la pregunta"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Respuesta Correcta</ion-label>
+      <ion-input [(ngModel)]="questionData.correctAnswer" placeholder="Ingrese la respuesta correcta"></ion-input>
+    </ion-item>
+    <div *ngFor="let answer of questionData.answers; let i = index; trackBy: trackByIndex">
+      <ion-item>
+        <ion-label>Respuesta {{i + 2}}</ion-label>
+        <ion-input [(ngModel)]="questionData.answers[i]" placeholder="Ingrese una respuesta"></ion-input>
+      </ion-item>
+    </div>
+    <ion-button (click)="addAnswer()">Agregar Respuesta</ion-button>
+  </div>
+
+  <div *ngIf="questionType === '2'">
+    <ion-item>
+      <ion-label>Pregunta</ion-label>
+      <ion-input [(ngModel)]="questionData.question" placeholder="Ingrese la pregunta"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Respuesta</ion-label>
+      <ion-input [(ngModel)]="questionData.answer" placeholder="Ingrese la respuesta"></ion-input>
+    </ion-item>
+  </div>
+
+  <div *ngIf="questionType === '3'">
+    <ion-item>
+      <ion-label>Imagen</ion-label>
+      <input type="file" (change)="onFileSelected($event)">
+    </ion-item>
+    <ion-item>
+      <ion-label>Recordatorio</ion-label>
+      <ion-input [(ngModel)]="questionData.note" placeholder="Ingrese un recordatorio"></ion-input>
+    </ion-item>
+  </div>
+
+  <ion-button expand="full" (click)="saveQuestion()">{{ button }}</ion-button>
+</ion-content>

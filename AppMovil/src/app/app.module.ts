@@ -15,11 +15,12 @@ import { getFirestore } from 'firebase/firestore';
 import { initializeApp } from 'firebase/app';
 import { ThememodalComponent } from './components/thememodal/thememodal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { AddQuestionModalComponent } from './components/addquestionmodal/addquestionmodal.component';
 @NgModule({
   declarations: [
     AppComponent,
-    ThememodalComponent
+    ThememodalComponent,
+    AddQuestionModalComponent
   ],
   imports: [
     BrowserModule, 

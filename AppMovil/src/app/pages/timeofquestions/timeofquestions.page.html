@@ -1,13 +1,24 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>timeofquestions</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">timeofquestions</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <app-animated-background></app-animated-background>
+  <div class="principaldiv">
+    <div class="question-number">
+      <ion-title>Pregunta numero {{contQuestion}}</ion-title>
+    </div>
+    <div class="question-box">
+      <div class="img">
+
+      </div>
+      <div class="question">
+        <ion-text>{{question}}</ion-text>
+      </div>
+      <div class="answers">
+        <ion-item *ngFor="let item of answers let index">
+          <ion-button class="answerbutton">{{ item }}</ion-button>
+        </ion-item>
+      </div>
+      <div class="nextbutton">
+
+      </div>
+    </div>
+  </div>
 </ion-content>
