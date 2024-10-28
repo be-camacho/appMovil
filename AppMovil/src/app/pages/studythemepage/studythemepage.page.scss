@@ -105,3 +105,8 @@
   .question-list ion-button.delet-mode {
     border: 2px solid red; /* Cambia el borde a amarillo en modo de eliminar */
   }
+  ion-tabs {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }

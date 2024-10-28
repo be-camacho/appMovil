@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { ModalController } from '@ionic/angular';
 
 @Component({
@@ -35,22 +36,26 @@ export class AddQuestionModalComponent implements OnInit {
     this.questionData = {
       questionType: '',
       question: '',
-      correctAnswer: '',
       answers: [],
-      answer: '',
       note: '',
       image: null
     };
     this.questionType = this.questionData.questionType;
   }
 
-  onFileSelected(event: any) {
-    const file = event.target.files[0];
-    this.questionData.image = file;
+  async takePhoto() {
+    const image = await Camera.getPhoto({
+      quality: 90,
+      allowEditing: false,
+      resultType: CameraResultType.DataUrl,
+      source: CameraSource.Camera
+    });
+
+    this.questionData.image = image.dataUrl;
   }
 
   addAnswer() {
-    if (this.questionData.answers.length < 3) {
+    if (this.questionData.answers.length < 4) {
       this.questionData.answers.push('');
     }
   }
@@ -61,13 +66,6 @@ export class AddQuestionModalComponent implements OnInit {
 
   async saveQuestion() {
     if (this.isValidQuestion()) {
-      if (this.questionData.questionType === '1') {
-        // Asegurarse de que la respuesta correcta esté en la primera posición del arreglo answers
-        this.questionData.answers = [this.questionData.correctAnswer, ...this.questionData.answers.filter(answer => answer)];
-      } else if (this.questionData.questionType === '2') {
-        // Asegurarse de que la respuesta esté en el arreglo answers
-        this.questionData.answers = [this.questionData.answer];
-      }
       this.dismiss(this.questionData);
     } else {
       alert('Por favor, complete todos los campos requeridos.');
@@ -76,9 +74,9 @@ export class AddQuestionModalComponent implements OnInit {
 
   isValidQuestion() {
     if (this.questionData.questionType === '1') {
-      return this.questionData.question && this.questionData.correctAnswer && this.questionData.answers.length <= 3;
+      return this.questionData.question && this.questionData.answers.length > 0;
     } else if (this.questionData.questionType === '2') {
-      return this.questionData.question && this.questionData.answer;
+      return this.questionData.question && this.questionData.answers.length > 0;
     } else if (this.questionData.questionType === '3') {
       return this.questionData.image || this.questionData.note;
     }

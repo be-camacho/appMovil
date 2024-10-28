@@ -39,9 +39,7 @@ export class QuestionpagePage implements OnInit {
     this.route.params.subscribe(params => {
       if (params['subTheme'] && params['studyTheme']) {
         this.selecteStudyTheme = JSON.parse(params['studyTheme']);
-        console.log('Received item:', this.selecteStudyTheme);
         this.selectedSubTheme = JSON.parse(params['subTheme']);
-        console.log('Received item:', this.selectedSubTheme);
       }
     });
   }
@@ -75,22 +73,22 @@ export class QuestionpagePage implements OnInit {
           id: this.firebaseService.createIdDoc(),
         };
         await this.firebaseService.createDocumentID(newQuestion, `Users/${uid}/studythemes/${tuid}/subthemes/${suid}/questions`, newQuestion.id);
-        this.questions.push(newQuestion);
       }
     }
   }
-  async updateQuestion(id: string, question: QuestionI) {
+
+  async updateQuestion(id: string, question: { [key: string]: any }) {
     const currentUser = await this.authService.getProfile();
     if (currentUser) {
       const uid = currentUser.uid;
       const tuid = this.selecteStudyTheme.id;
       const suid = this.selectedSubTheme.id;
       const updatedQuestion: QuestionI = {
-        type: question.type,
-        note: question.note,
-        question: question.question,
-        answers: question.answers,
-        imagecod: question.imagecod,
+        type: question['questionType'],
+        note: question['note'],
+        question: question['question'],
+        answers: question['answers'],
+        imagecod: question['image'] || null, // Asegúrate de que imagecod no sea undefined
         id: id
       };
       await this.firebaseService.createDocumentID(updatedQuestion, `Users/${uid}/studythemes/${tuid}/subthemes/${suid}/questions`, updatedQuestion.id);
@@ -119,7 +117,7 @@ export class QuestionpagePage implements OnInit {
       componentProps: {
         title: 'Editar Pregunta',
         button: 'Guardar',
-        questionData: question
+        questionData: { ...question, questionType: question.type }
       }
     });
     modal.onDidDismiss().then((data) => {

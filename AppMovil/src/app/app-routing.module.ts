@@ -14,11 +14,13 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'register',
-    loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
+    loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'mainmenu',
@@ -27,7 +29,8 @@ const routes: Routes = [
   },
   {
     path: 'authpage',
-    loadChildren: () => import('./pages/authpage/authpage.module').then( m => m.AuthpagePageModule)
+    loadChildren: () => import('./pages/authpage/authpage.module').then( m => m.AuthpagePageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'forgotpassword',
