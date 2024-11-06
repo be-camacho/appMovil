@@ -19,13 +19,16 @@ import { AddQuestionModalComponent } from './components/addquestionmodal/addques
 import { PhotosComponent } from './components/photos/photos.component';
 import { SQLite } from '@ionic-native/sqlite/ngx'; // Importa SQLite
 import { SQLiteService } from './services/SQLite.service'; // Importa el servicio SQLite
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { share } from 'rxjs';
 
 @NgModule({
   declarations: [
     AppComponent,
     ThememodalComponent,
     AddQuestionModalComponent,
-    PhotosComponent
+    PhotosComponent,
+    
   ],
   imports: [
     BrowserModule, 
@@ -35,7 +38,8 @@ import { SQLiteService } from './services/SQLite.service'; // Importa el servici
     ReactiveFormsModule,
     SharedModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    
   ],
   providers: [{ provide: RouteReuseStrategy, 
     useClass: IonicRouteStrategy }, 
@@ -43,7 +47,8 @@ import { SQLiteService } from './services/SQLite.service'; // Importa el servici
     provideAuth(() => getAuth()), 
     provideFirestore(() => getFirestore()),
     SQLite,
-    SQLiteService
+    SQLiteService,
+    provideHttpClient(withInterceptorsFromDi())
   ],
   bootstrap: [AppComponent],
 })

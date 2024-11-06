@@ -56,8 +56,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/timeofquestions/timeofquestions.module').then( m => m.TimeofquestionsPageModule),
     canActivate: [AuthGuard]
   },
-
-
+  {
+    path: 'testpage',
+    loadChildren: () => import('./pages/testpage/testpage.module').then( m => m.TestpagePageModule),
+    canActivate: [AuthGuard]
+  },
 
 ];
 

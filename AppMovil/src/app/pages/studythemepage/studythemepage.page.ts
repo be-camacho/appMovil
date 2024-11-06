@@ -1,4 +1,4 @@
-import { Component, input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
@@ -65,6 +65,7 @@ export class StudythemepagePage implements OnInit {
   async openEditThemeModal(theme: StudyThemeI) {
     const modal = await this.modalController.create({
       component: ThememodalComponent,
+      cssClass: 'custom-modal',
       componentProps: {
         title: 'Modificar Tema de Estudio',
         buttonText: 'Guardar cambios',

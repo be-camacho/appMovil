@@ -52,7 +52,9 @@ export class SQLiteService {
       const photos = [];
       for (let i = 0; i < res.rows.length; i++) {
         photos.push(res.rows.item(i));
+        console.log(photos)
       }
+      
       return photos;
     } catch (error) {
       console.error('Error getting photos:', error);

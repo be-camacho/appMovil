@@ -5,7 +5,6 @@ import { SharedModule } from 'src/app/modules/SharedModule/shared.module';
 import { IonicModule } from '@ionic/angular';
 import { MainmenuPageRoutingModule } from './mainmenu-routing.module';
 import { MainmenuPage } from './mainmenu.page';
-
 @NgModule({
   imports: [
     CommonModule,
@@ -13,6 +12,7 @@ import { MainmenuPage } from './mainmenu.page';
     IonicModule,
     MainmenuPageRoutingModule,
     SharedModule,
+    
   ],
   declarations: [MainmenuPage]
 })

@@ -13,7 +13,24 @@ export class TimeofquestionsPage implements OnInit {
   question = "¿Cuantos disparos puede hacer jhin antes de recargar?";
   answers = ["uno","dos","tres","cuatro"];
   img ="";
+  interval:any;
+  timeLeft: number = 30;
+
   ngOnInit() {
+    this.startTimer();
   }
+
+  startTimer() {
+    this.interval = setInterval(() => {
+      if (this.timeLeft > 0) {
+        this.timeLeft--;
+      } else {
+        clearInterval(this.interval);
+      }
+    }, 1000);
+  }
+
+  
+
 
 }

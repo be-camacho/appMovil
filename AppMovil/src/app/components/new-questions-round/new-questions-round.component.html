@@ -1,0 +1,36 @@
+
+<div class="modal">
+
+    <div class="titlebox">
+      <div class="title">
+        <p>Crea una ronda de preguntas</p>
+        <ion-icon class="closebtt" (click)="close()" name="close-circle-outline"></ion-icon>
+      </div>
+    </div>
+  
+  <div class="listbox" *ngIf="selectedlist === 1">
+    <p>Seleccione tema de estudio</p>
+    <ion-list lines="none" class="list">
+      <ion-item *ngFor="let theme of themeList" (click)="onThemeClick(theme)">
+        <ion-button>{{ theme.tname }}</ion-button>
+      </ion-item>
+    </ion-list>
+  </div>
+  <div class="listbox" *ngIf="selectedlist === 2">
+    <p>Seleccione subtema de estudio</p>
+    <ion-list lines="none" class="list">
+      <ion-item *ngFor="let subTheme of subThemeList" (click)="onSubThemeClick(subTheme)">
+        <ion-button>{{ subTheme.subtname }}</ion-button>
+      </ion-item>
+    </ion-list>
+    <div *ngIf="quantityOfQuestions === true">
+      
+      <div *ngFor="let question of questionQuantity; let i = index">
+        <ion-radio-group value="custom-checked">
+          <ion-radio value="custom" aria-label="{{ question }}"></ion-radio>
+        </ion-radio-group>
+      </div>
+      
+    </div>
+  </div>
+</div>

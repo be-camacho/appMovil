@@ -1,12 +1,18 @@
 <ion-content [fullscreen]="true">
   <app-animated-background></app-animated-background>
+  <div class="full">
+    @if(isActiveModal){
+      <app-new-questions-round [uid]="uid" (closeModal)="closeModal()" class="modal"  ></app-new-questions-round>
+    }
+  </div>
+  
   <div class="header"><!--contenedor del header-->
     <ion-title class="title">Bienvenido {{ user?.name }}</ion-title>
     <p class="subTitle">presiona el boton de play para comenzar</p>
   </div>
 
   <div class="container" >
-    <div class="startButton" (click)="openPhotoModal()"><span>Play</span></div>
+    <div class="startButton" (click)="openModal()"><span>Play</span></div>
   </div>
 
   <ion-tabs>
@@ -29,4 +35,7 @@
     </ion-fab-button>
   </ion-fab>
 
+  @if(isActiveModal){
+    <div class="opacitimodal"></div>
+  }
 </ion-content>
