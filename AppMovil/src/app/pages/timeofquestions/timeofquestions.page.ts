@@ -60,6 +60,9 @@ export class TimeofquestionsPage implements OnInit {
     } else {
       console.log('Fin de las preguntas');
       // Lógica para manejar el fin de las preguntas
+      this.questions = [];
+      this.correctAnswers = [];
+      this.currentQuestionIndex = 0;
       this.router.navigate(['/mainmenu']);
     }
   }

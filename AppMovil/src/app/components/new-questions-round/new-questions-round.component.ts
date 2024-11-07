@@ -86,6 +86,7 @@ export class NewQuestionsRoundComponent  implements OnInit {
     };
     loading.dismiss();
     this.router.navigate(['/timeofquestions'], navigationExtras);
+    this.close();
   }
 
   async questionsLength(){
