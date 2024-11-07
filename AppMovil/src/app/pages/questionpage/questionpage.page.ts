@@ -35,7 +35,7 @@ export class QuestionpagePage implements OnInit {
     ){
       
     }
-
+  
   ngOnInit() {
     this.loadQuestions();
     this.initializeDatabase();

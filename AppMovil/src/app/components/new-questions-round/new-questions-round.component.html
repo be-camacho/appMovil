@@ -23,14 +23,13 @@
         <ion-button>{{ subTheme.subtname }}</ion-button>
       </ion-item>
     </ion-list>
-    <div *ngIf="quantityOfQuestions === true">
-      
-      <div *ngFor="let question of questionQuantity; let i = index">
-        <ion-radio-group value="custom-checked">
-          <ion-radio value="custom" aria-label="{{ question }}"></ion-radio>
-        </ion-radio-group>
-      </div>
-      
+    <div *ngIf="quantityOfQuestions && !loading">
+      <p>Seleccione cantidad de preguntas</p>
+      <ion-list lines="none" class="quantitybox">
+        <ion-item *ngFor="let quantity of questionQuantity">
+          <ion-button (click)="onQuantityClick(quantity)">{{ quantity }}</ion-button>
+        </ion-item>
+      </ion-list>
     </div>
   </div>
 </div>

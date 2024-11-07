@@ -22,8 +22,7 @@
     border-radius: 15px;
     border: 2px solid rgb(0, 0, 0);
     width: 80%;
-    width: 80%;
-    height: 70%;
+    max-height: 70%;
 }
 .img{
     border: 1px solid rgb(223, 238, 10);
@@ -32,6 +31,7 @@
     margin-top: 10px;
 }
 .question{
+    justify-content: center;
     border: 1px solid rgb(223, 238, 10);
     width: 90%;
     min-height: 120px;

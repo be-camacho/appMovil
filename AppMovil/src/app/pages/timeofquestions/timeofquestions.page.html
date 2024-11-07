@@ -2,21 +2,17 @@
   <app-animated-background></app-animated-background>
   <div class="principaldiv">
     <div class="question-number">
-      <ion-title>Pregunta numero {{contQuestion}}</ion-title>
+      <ion-title>Pregunta numero {{ questionNumber }}</ion-title>
     </div>
-    <div class="question-box">
-      <div class="img">
-
-      </div>
+    <div class="question-box" *ngIf="questions[currentQuestionIndex]">
       <div class="question">
-        <ion-text>{{question}}</ion-text>
+        <ion-text>{{ questions[currentQuestionIndex].question }}</ion-text>
       </div>
       <div class="answers">
-        <ion-item *ngFor="let item of answers let index">
+        <ion-item *ngFor="let item of questions[currentQuestionIndex].answers" (click)="onItemClick(item)">
           <ion-button class="answerbutton">{{ item }}</ion-button>
         </ion-item>
       </div>
-        <p>{{ timeLeft }}</p>
       <div class="nextbutton">
       </div>
     </div>
