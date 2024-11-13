@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
 import { StudyThemeI } from 'src/app/models/studytheme.models';
 import { AuthService } from 'src/app/services/auth.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
@@ -16,19 +15,22 @@ export class StudythemepagePage implements OnInit {
   studythemes: StudyThemeI[] = [];
   themeForm: FormGroup;
   loading:boolean = false;
-  editMode:boolean = false;
-  deletMode: boolean = false;
-  isActiveModal: boolean = false;
-  namein: string = "";
-  uid: string;
-  tuid: string="";
-  theme:boolean = true;
+
+  editMode:boolean = false; // Variable para controlar el modo de edición
+  deletMode: boolean = false; // Variable para controlar el modo de eliminación
+
+  isActiveModal: boolean = false; // Variable para controlar la apertura y cierre del modal
+
+  namein: string;// variable para guardar el nombre del tema a editar
+  uid: string;// variable para guardar el id de el usuario actual
+  tuid: string;// variable para guardar el id del tema a editar
+
+  theme:boolean = true;// variable para especificar que el modal es para un tema
   
   constructor(
     private router: Router,
     private authService: AuthService,
     private firebaseService: FirebaseService,
-    private modalController: ModalController, 
     private formBuilder: FormBuilder){
       
       this.themeForm = this.formBuilder.group({
@@ -58,6 +60,11 @@ export class StudythemepagePage implements OnInit {
 
   onItemClick(item: StudyThemeI) {
     if(this.editMode){
+      this.isActiveModal = true;
+      this.namein = item.tname;
+      this.tuid = item.id;
+      console.log("nombre : "+this.namein);
+      console.log("tid : "+this.tuid);
     }else if(this.deletMode){
       this.deleteTheme(item);
     }else{

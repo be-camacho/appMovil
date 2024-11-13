@@ -33,15 +33,19 @@ export class AddNewDocumentComponent  implements OnInit {
   ngOnInit() {
     this.loadconfig();
     console.log("se ejecuto");
-    
+    console.log("se recivio el tid: "+this.tid);
+    console.log("se recivio el nombre : "+this.nameInput);
+    console.log("la variable de edicion esta en: "+this.isEdit);
   }
 
   submit() {
     if (this.nameform.valid) {
       if (this.isEdit) {
+        console.log("esta gurdando en modo de edicion")
         this.updateTheme(this.tid, this.nameform.value.Name);
         this.close();
       } else {
+        console.log("esta gurdando en modo de creacion")
         this.addTheme(this.nameform.value.Name);
         this.close();
       }

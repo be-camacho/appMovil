@@ -1,4 +1,4 @@
-1 configurar el acceso a editar temas de estudio 
+1 configurar el acceso a editar temas de estudio "completo" 20:10 13/11/2024
 2 hacer la conexion de subthemes con el componente add new document 
 3 añadir temporizador animado a las rondas de preguntas 
 4 añadir contador de preguntas correctas/total animado 
@@ -11,6 +11,7 @@
 11 mandar mensajes al correo de el usaurio a travez de ionic "idea 1 (una bienvenida a nuestro nuevo usuario/a)"
 12 crear pagina web para descargar la aplicacion
 13 agregar error 404 a la aplicacion
+
 100% de la rubrica
 
 14 agregar pagina en construccion "estadisticas"

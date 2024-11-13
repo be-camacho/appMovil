@@ -6,7 +6,10 @@
     </div>
     <form class="form" [formGroup]="nameform" novalidate>
       <div class="inputbox">
-        <ion-input class="input" formControlName="Name"  placeholder="{{inputname}}" style="color:rgb(255, 255, 255)"></ion-input>
+        @if (!isEdit) 
+          {<ion-input class="input" formControlName="Name"  placeholder="{{inputname}}" style="color:rgb(255, 255, 255)"></ion-input>
+        }@else()
+          {<ion-input [(ngModel)]="inputname" class="input" formControlName="Name"  placeholder="{{inputname}}" style="color:rgb(255, 255, 255)"></ion-input>}
       </div>
       <div class="savebtt">
         <ion-button (click)="submit()">
