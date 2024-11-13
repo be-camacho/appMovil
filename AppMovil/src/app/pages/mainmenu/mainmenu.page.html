@@ -2,12 +2,16 @@
   <app-animated-background></app-animated-background>
   <div class="full">
     @if(isActiveModal){
-      <app-new-questions-round [uid]="uid" (closeModal)="closeModal()" class="modal"  ></app-new-questions-round>
+      <app-new-questions-round 
+      [uid]="uid" 
+      (closeModal)="closeModal()" 
+      class="modal">
+    </app-new-questions-round>
     }
   </div>
   
   <div class="header"><!--contenedor del header-->
-    <ion-title class="title">Bienvenido {{ user?.name }}</ion-title>
+    <ion-title class="title">Bienvenido {{ name }}</ion-title>
     <p class="subTitle">presiona el boton de play para comenzar</p>
   </div>
 

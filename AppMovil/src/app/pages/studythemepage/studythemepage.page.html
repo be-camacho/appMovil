@@ -1,5 +1,10 @@
 <ion-content [fullscreen]="true">
   <app-animated-background></app-animated-background>
+  <div class="full" *ngIf="isActiveModal">
+    <app-add-new-document [nameInput]="namein" [isEdit]="editMode" [uid]="uid" [tid]="tid" [istheme]="theme"
+      (closeModal)="closeModal()">
+    </app-add-new-document>
+  </div>
   <div class="theme-container">
     <div class="theme-list-container">
       <div class="header">
@@ -11,11 +16,11 @@
         </ion-item>
       </ion-list>
       <div class="button-group">
-        <ion-button (click)="openAddThemeModal()" class="icon-button">
+        <ion-button (click)="openModal()" class="icon-button">
           <ion-icon name="add-circle-outline"></ion-icon>
         </ion-button>
         <ion-button (click)="toggleEditMode()" [ngClass]="{'edit-mode-button': editMode}" class="icon-button">
-          <ion-icon name="create-outline"></ion-icon> 
+          <ion-icon name="create-outline"></ion-icon>
         </ion-button>
         <ion-button (click)="toggleDeletMode()" [ngClass]="{'delet-mode-button': deletMode}" class="icon-button">
           <ion-icon name="trash-outline"></ion-icon>
@@ -28,7 +33,7 @@
       <ion-tab-button>
         <ion-icon name="stats-chart-outline"></ion-icon>
       </ion-tab-button>
-      <ion-tab-button  [routerLink]="['/mainmenu']">
+      <ion-tab-button [routerLink]="['/mainmenu']">
         <ion-icon name="home-outline"></ion-icon>
       </ion-tab-button>
       <ion-tab-button>

@@ -1,14 +1,14 @@
-import { Component, EventEmitter, Input, OnInit, Output, output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { StudyThemeI } from 'src/app/models/studytheme.models';
 import { FirebaseService } from 'src/app/services/firebase.service';
 
 @Component({
-  selector: 'theme-modal',
-  templateUrl: './thememodal.component.html',
-  styleUrls: ['./thememodal.component.scss'],
+  selector: 'app-add-new-document',
+  templateUrl: './add-new-document.component.html',
+  styleUrls: ['./add-new-document.component.scss'],
 })
-export class ThememodalComponent implements OnInit {
+export class AddNewDocumentComponent  implements OnInit {
   @Input() nameInput: string;
   @Input() isEdit: boolean;
   @Input() uid: string;
@@ -19,22 +19,23 @@ export class ThememodalComponent implements OnInit {
   inputname: string;
   buttontext: string;
   tittle: string;
-  theme:boolean = true;
+  
+
   constructor(
     private formBuilder: FormBuilder,
-    private firebaseService: FirebaseService,
-    ) {
+    private firebaseService: FirebaseService,) {
 
-    this.nameform = this.formBuilder.group({
-      Name: ['', Validators.required]
-    });
-  }
-
+      this.nameform = this.formBuilder.group({
+        Name: ['', Validators.required]
+      });
+    }
+  
   ngOnInit() {
     this.loadconfig();
     console.log("se ejecuto");
+    
   }
-  
+
   submit() {
     if (this.nameform.valid) {
       if (this.isEdit) {
@@ -44,6 +45,8 @@ export class ThememodalComponent implements OnInit {
         this.addTheme(this.nameform.value.Name);
         this.close();
       }
+    }else{
+      console.log("no valido");
     }
   }
 

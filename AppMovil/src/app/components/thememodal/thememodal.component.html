@@ -1,19 +1,22 @@
-<div class="modal-transparent">
-<ion-header>
-  <ion-toolbar>
-    <ion-title>{{ title }}</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="dismiss()">Cerrar</ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-<ion-content>
-  <form [formGroup]="themeForm" (ngSubmit)="submit()">
-    <ion-item>
-      <ion-label position="floating">{{inputname}}</ion-label>
-      <ion-input formControlName="themeName"></ion-input>
-    </ion-item>
-    <ion-button expand="full" type="submit" [disabled]="!themeForm.valid">{{ buttonText }}</ion-button>
+<div class="fullscreen">
+  <div class="formbox">
+    <ion-icon class="closebtt" (click)="close()" name="close-circle-outline"></ion-icon>
+    <div class="title">
+      <p>{{tittle}}</p>
+    </div>
+    <form formGroup="nameform">
+      @if(isEdit){
+        <div class="inputbox">
+          <ion-input class="input" formControlName="Name" placeholder="{{nameInput}}" style="color:rgb(255, 255, 255)"></ion-input>
+        </div>
+      }@else{
+        <div class="inputbox">
+          <ion-input class="input" formControlName="Name" placeholder="{{nameInput}}" style="color:rgb(255, 255, 255)"></ion-input>
+        </div>
+      }
+    <div class="savebtt">
+      <button type="submit">{{buttontext}}</button>
+    </div>
   </form>
-</ion-content>
+  </div>
 </div>
