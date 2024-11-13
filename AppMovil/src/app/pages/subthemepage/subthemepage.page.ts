@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
 import { StudyThemeI } from 'src/app/models/studytheme.models';
 import { SubthemeI } from 'src/app/models/subtheme.models';
 import { AuthService } from 'src/app/services/auth.service';
@@ -17,17 +16,28 @@ export class SubthemepagePage implements OnInit {
   newStudyTheme: SubthemeI;
   subthemes: SubthemeI[] = [];
   themeForm: FormGroup;
+
   loading: boolean = false;
+
   editMode: boolean = false;
   deletMode: boolean = false;
+
+  isActiveModal: boolean = false; // Variable para controlar la apertura y cierre del modal
+
   selecteStudyTheme: StudyThemeI;
+
+  namein: string;// variable para guardar el nombre del tema a editar
+
+  uid: string;// variable para guardar el id de el usuario actual
+  tid: string;// variable para guardar el id del tema a editar
+  sid: string;// variable para guardar el id del subtema a editar
+  theme:boolean = false;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
     private firebaseService: FirebaseService,
-    private modalController: ModalController, 
     private formBuilder: FormBuilder
   ) {
     this.themeForm = this.formBuilder.group({
@@ -36,55 +46,25 @@ export class SubthemepagePage implements OnInit {
   }
   ngOnInit() {
     this.loadSubThemes();
-    this.route.params.subscribe(params => {
+
+    this.route.params.subscribe(params => { // cambiar manera de enviarlos con la que se uso en el new question round es mas efectiva
       if (params['item']) {
         this.selecteStudyTheme = JSON.parse(params['item']);
-        console.log('Received item:', this.selecteStudyTheme);
+        this.tid = this.selecteStudyTheme.id;
       }
     });
   }
 
   async loadSubThemes() {
     const currentUser = await this.authService.getProfile();
-    const tuid = this.selecteStudyTheme.id;
-    const uid = currentUser.uid;
-    this.firebaseService.getCollectionChanges<SubthemeI>(`Users/${uid}/studythemes/${tuid}/subthemes`).subscribe((data) => {
+    this.uid = currentUser.uid;
+    this.firebaseService.getCollectionChanges<SubthemeI>(`Users/${this.uid}/studythemes/${this.tid}/subthemes`).subscribe((data) => {
       if (data) {
         this.subthemes = data;
       }
     });
   }
 
-  async updateSubTheme(id: string, subThemeName: string) {
-    const currentUser = await this.authService.getProfile();
-    if (currentUser) {
-      const uid = currentUser.uid;
-      const tuid = this.selecteStudyTheme.id;
-      const updatedSubTheme: SubthemeI = {
-        id: id,
-        subtname: subThemeName
-      };
-      await this.firebaseService.createDocumentID(updatedSubTheme, `Users/${uid}/studythemes/${tuid}/subthemes`, updatedSubTheme.id);
-    }
-  }
-
-  async addSubTheme(subThemeName: string) {
-    if (subThemeName) {
-      const currentUser = await this.authService.getProfile();
-      console.log('Current user:', currentUser);
-      if (currentUser) {
-        const uid = currentUser.uid;
-        const tuid = this.selecteStudyTheme.id;
-        const newTheme: SubthemeI = {
-          id: this.firebaseService.createIdDoc(),
-          subtname: subThemeName
-        };
-        await this.firebaseService.createDocumentID(newTheme, `Users/${uid}/studythemes/${tuid}/subthemes`, newTheme.id);
-        this.subthemes.push(newTheme);
-      }
-    }
-  }
-  
   async deleteSubTheme(subTheme: SubthemeI) {
     const currentUser = await this.authService.getProfile();
     const uid = currentUser.uid;
@@ -94,6 +74,9 @@ export class SubthemepagePage implements OnInit {
 
   onItemClick(item: SubthemeI) {
     if (this.editMode) {
+      this.namein = item.subtname;
+      this.sid = item.id;
+      this.openModal();
     } else if (this.deletMode) {
       this.deleteSubTheme(item);
     } else {
@@ -114,5 +97,11 @@ export class SubthemepagePage implements OnInit {
     if (this.deletMode) {
       this.editMode = false; // Desactiva el modo de edición si el modo de eliminación está activo
     }
+  }
+  async openModal() {
+    this.isActiveModal = true;
+  }
+  async closeModal() {
+    this.isActiveModal = false;
   }
 }

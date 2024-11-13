@@ -45,6 +45,7 @@ export class MainmenuPage implements OnInit {
       console.log('Sesión cerrada');
     })
   }
+  
   async openModal() {
     this.isActiveModal = true;
   }

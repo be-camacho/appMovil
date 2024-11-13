@@ -23,7 +23,7 @@ export class StudythemepagePage implements OnInit {
 
   namein: string;// variable para guardar el nombre del tema a editar
   uid: string;// variable para guardar el id de el usuario actual
-  tuid: string;// variable para guardar el id del tema a editar
+  tid: string;// variable para guardar el id del tema a editar
 
   theme:boolean = true;// variable para especificar que el modal es para un tema
   
@@ -62,9 +62,7 @@ export class StudythemepagePage implements OnInit {
     if(this.editMode){
       this.isActiveModal = true;
       this.namein = item.tname;
-      this.tuid = item.id;
-      console.log("nombre : "+this.namein);
-      console.log("tid : "+this.tuid);
+      this.tid = item.id;
     }else if(this.deletMode){
       this.deleteTheme(item);
     }else{
@@ -87,8 +85,6 @@ export class StudythemepagePage implements OnInit {
   }
   async openModal() {
     this.isActiveModal = true;
-    console.log("paso el open ");
-    console.log(this.isActiveModal);
   }
   async closeModal() {
     this.isActiveModal = false;

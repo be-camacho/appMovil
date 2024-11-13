@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { StudyThemeI } from 'src/app/models/studytheme.models';
+import { SubthemeI } from 'src/app/models/subtheme.models';
 import { FirebaseService } from 'src/app/services/firebase.service';
 
 @Component({
@@ -13,6 +14,7 @@ export class AddNewDocumentComponent  implements OnInit {
   @Input() isEdit: boolean;
   @Input() uid: string;
   @Input() tid: string;
+  @Input() sid: string;
   @Input() istheme: boolean;
   @Output() closeModal = new EventEmitter<void>();
   nameform: FormGroup;
@@ -40,14 +42,22 @@ export class AddNewDocumentComponent  implements OnInit {
 
   submit() {
     if (this.nameform.valid) {
-      if (this.isEdit) {
-        console.log("esta gurdando en modo de edicion")
-        this.updateTheme(this.tid, this.nameform.value.Name);
-        this.close();
-      } else {
-        console.log("esta gurdando en modo de creacion")
-        this.addTheme(this.nameform.value.Name);
-        this.close();
+      if (this.istheme){
+        if (this.isEdit) {
+          this.updateTheme(this.tid, this.nameform.value.Name);
+          this.close();
+        } else {
+          this.addTheme(this.nameform.value.Name);
+          this.close();
+        }
+      }else{
+        if (this.isEdit) {
+          this.updateSubTheme(this.sid, this.nameform.value.Name);
+          this.close();
+        } else {
+          this.addSubTheme(this.nameform.value.Name);
+          this.close();
+        }
       }
     }else{
       console.log("no valido");
@@ -72,6 +82,28 @@ export class AddNewDocumentComponent  implements OnInit {
       tname: themeName
     };
     await this.firebaseService.createDocumentID(updatedTheme, `Users/${this.uid}/studythemes`, updatedTheme.id);
+  }
+
+  //añadir subtemas
+  async addSubTheme(subThemeName: string) {
+    if (subThemeName) {
+      const newSubTheme: SubthemeI = {
+        id: this.firebaseService.createIdDoc(),
+        subtname: subThemeName
+      };
+      await this.firebaseService.createDocumentID(newSubTheme, `Users/${this.uid}/studythemes/${this.tid}/subthemes`, newSubTheme.id);
+    }
+  }
+  
+
+
+  //editar subtemas
+  async updateSubTheme(id: string, subThemeName: string) {
+    const updatedSubTheme: SubthemeI = {
+      id: id,
+      subtname: subThemeName
+    };
+    await this.firebaseService.createDocumentID(updatedSubTheme, `Users/${this.uid}/studythemes/${this.tid}/subthemes`, updatedSubTheme.id);
   }
   
   //cerrar modal

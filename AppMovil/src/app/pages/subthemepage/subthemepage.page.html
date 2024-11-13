@@ -1,5 +1,10 @@
 <ion-content [fullscreen]="true">
   <app-animated-background></app-animated-background>
+  <div class="full" *ngIf="isActiveModal">
+    <app-add-new-document [nameInput]="namein" [isEdit]="editMode" [uid]="uid" [tid]="tid" [sid]="sid" [istheme]="theme"
+      (closeModal)="closeModal()">
+    </app-add-new-document>
+  </div>
   <div class="theme-container">
     <div class="theme-list-container">
       <div class="header">
@@ -11,7 +16,7 @@
             </ion-item>
           </ion-list>
           <div class="button-group">
-            <ion-button  class="icon-button">
+            <ion-button (click)="openModal()" class="icon-button">
               <ion-icon name="add-circle-outline"></ion-icon>
             </ion-button>
             <ion-button (click)="toggleEditMode()" class="icon-button">
