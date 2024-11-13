@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
-import { ThememodalComponent } from 'src/app/components/thememodal/thememodal.component';
 import { StudyThemeI } from 'src/app/models/studytheme.models';
 import { SubthemeI } from 'src/app/models/subtheme.models';
 import { AuthService } from 'src/app/services/auth.service';
@@ -56,43 +55,6 @@ export class SubthemepagePage implements OnInit {
     });
   }
 
-  async openAddSubThemeModal() {
-    const modal = await this.modalController.create({
-      component: ThememodalComponent,
-      componentProps: {
-        title: 'Crear una Unidad para ' + this.selecteStudyTheme.tname,
-        buttonText: 'Crear',
-        inputname: 'Nombre de la Unidad',
-        themeName: ''
-      }
-    });
-
-    modal.onDidDismiss().then((data) => {
-      if (data.data) {
-        this.addSubTheme(data.data.themeName);
-      }
-    });
-    return await modal.present();
-  }
-  
-  async openEditSubThemeModal(subTheme: SubthemeI) {
-    const modal = await this.modalController.create({
-      component: ThememodalComponent,
-      componentProps: {
-        title: 'Modificar Unidad de ' + this.selecteStudyTheme.tname,
-        buttonText: 'Guardar cambios',
-        inputname: 'Nombre de la Unidad',
-        themeName: subTheme.subtname
-      }
-    });
-    modal.onDidDismiss().then((data) => {
-      if (data.data) {
-        this.updateSubTheme(subTheme.id, data.data.themeName);
-      }
-    });
-    return await modal.present();
-  }
-
   async updateSubTheme(id: string, subThemeName: string) {
     const currentUser = await this.authService.getProfile();
     if (currentUser) {
@@ -122,15 +84,16 @@ export class SubthemepagePage implements OnInit {
       }
     }
   }
+  
   async deleteSubTheme(subTheme: SubthemeI) {
     const currentUser = await this.authService.getProfile();
     const uid = currentUser.uid;
     const tuid = this.selecteStudyTheme.id;
     this.firebaseService.deleteDocumentID(`Users/${uid}/studythemes/${tuid}/subthemes`, subTheme.id);
   }
+
   onItemClick(item: SubthemeI) {
     if (this.editMode) {
-      this.openEditSubThemeModal(item);
     } else if (this.deletMode) {
       this.deleteSubTheme(item);
     } else {
