@@ -6,6 +6,10 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ApiConnectionService {
-  private apiUrl = 'http://localhost:3000/api';
+  private apiUrl = 'https://motivational-phrases-6jnq5ysi5-benjamins-projects-1248670c.vercel.app/api/phrases';
   constructor(private http: HttpClient) { }
+
+  getrandomPhrase(): Observable<any> {
+    return this.http.get<any>(this.apiUrl);
+  }
 }
