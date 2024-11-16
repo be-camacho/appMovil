@@ -18,7 +18,7 @@ import { AddQuestionModalComponent } from './components/addquestionmodal/addques
 import { SQLite } from '@ionic-native/sqlite/ngx'; // Importa SQLite
 import { SQLiteService } from './services/SQLite.service'; // Importa el servicio SQLite
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { share } from 'rxjs';
+
 
 @NgModule({
   declarations: [

@@ -9,7 +9,7 @@ export class ApiConnectionService {
   private apiUrl = 'https://motivational-phrases-6jnq5ysi5-benjamins-projects-1248670c.vercel.app/api/phrases';
   constructor(private http: HttpClient) { }
 
-  getrandomPhrase(): Observable<any> {
-    return this.http.get<any>(this.apiUrl);
+  getRandomPhrase(): Observable<string> {
+    return this.http.get(this.apiUrl, { responseType: 'text' });
   }
 }
