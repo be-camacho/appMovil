@@ -3,7 +3,9 @@
 4 añadir contador de preguntas correctas/total animado 
 5 mensaje de logoro/fallo al seleccionar una respuesta 
 6 crear componente al finalizar la ronda de preguntas con estadisticas de la ronda (total de preguntas/preguntas buenas/tiempo total que se demoro/"pensar en mas opcional")
+
 7 diseñar el componente new question component desde 0 y conectarlo con la pagina de questions de manera correcta --------pioridad 
+
 8 diseñar la pagina de usuario
 
 10 conectar la api creada con mi aplicacion
