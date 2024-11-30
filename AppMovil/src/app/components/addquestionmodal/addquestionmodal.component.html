@@ -1,52 +1,37 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>{{ title }}</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="dismiss()">Cerrar</ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<div class="full">
+  <div class="box">
+    
+    <ion-icon class="closebtt" name="close-circle-outline" (click)="close()" ></ion-icon>
 
-<ion-content>
-  <ion-item>
-    <ion-label>Tipo de Pregunta</ion-label>
-    <ion-select [(ngModel)]="questionData.questionType" (ionChange)="onQuestionTypeChange()">
-      <ion-select-option value="1">Pregunta de Alternativas</ion-select-option>
-      <ion-select-option value="2">Pregunta de Desarrollo</ion-select-option>
-      <ion-select-option value="3">Recordatorio</ion-select-option>
-    </ion-select>
-  </ion-item>
-
-  <div *ngIf="questionType === '1' || questionType === '2'">
-    <ion-item>
-      <ion-label>Imagen</ion-label>
-      <ion-button (click)="takePhoto()">Tomar Foto</ion-button>
-      <img *ngIf="questionData.image" [src]="questionData.image" />
-    </ion-item>
-    <ion-item>
-      <ion-label>Pregunta</ion-label>
-      <ion-input [(ngModel)]="questionData.question" placeholder="Ingrese la pregunta"></ion-input>
-    </ion-item>
-    <div *ngFor="let answer of questionData.answers; let i = index; trackBy: trackByIndex">
-      <ion-item>
-        <ion-label>{{ i === 0 ? 'Respuesta Correcta' : 'Respuesta ' + (i + 1) }}</ion-label>
-        <ion-input [(ngModel)]="questionData.answers[i]" placeholder="Ingrese una respuesta"></ion-input>
-      </ion-item>
+    <div class="title">
+      <p>{{title}}</p>
     </div>
-    <ion-button (click)="addAnswer()">Agregar Respuesta</ion-button>
-  </div>
+   
+      <div class="photobox">
+        <img src="{{photo}}" class="photo" alt="photo" (click)="takePhoto()">
+      </div>
+      
+      <div class="questionbox">
+        <ion-input [(ngModel)]="QuestionI.question" placeholder="Ingrese una pregunta"></ion-input>
+      </div>
 
-  <div *ngIf="questionType === '3'">
-    <ion-item>
-      <ion-label>Imagen</ion-label>
-      <ion-button (click)="takePhoto()">Tomar Foto</ion-button>
-      <img *ngIf="questionData.image" [src]="questionData.image" />
-    </ion-item>
-    <ion-item>
-      <ion-label>Recordatorio</ion-label>
-      <ion-input [(ngModel)]="questionData.note" placeholder="Ingrese un recordatorio"></ion-input>
-    </ion-item>
-  </div>
+      <div class="answersbox">
 
-  <ion-button expand="full" (click)="saveQuestion()">{{ button }}</ion-button>
-</ion-content>
+        <div class="forbox" *ngFor="let input of QuestionI.answers let i = index; trackBy: trackByIndex">
+          <ion-input
+          [(ngModel)]="QuestionI.answers[i]" [placeholder]="i === 0 ? 'Ingrese respuesta correcta' : 'Ingrese respuesta Trampa ' + (i)" required>
+          </ion-input>
+        </div>
+
+        <div class="addbutton">
+          <ion-button (click)="addInput()" [disabled]="QuestionI.answers.length >= 4">Añadir respuesta</ion-button>
+        </div>
+      </div>
+      
+      <div class="buttonbox">
+        <ion-button (click)="submit()">
+          <p>{{buttontext}}</p>
+        </ion-button>
+      </div>
+  </div>
+</div>

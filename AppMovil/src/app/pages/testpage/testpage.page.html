@@ -1,23 +1,43 @@
 <div class="full">
   <div class="box">
+    
+    <ion-icon class="closebtt" name="close-circle-outline" (click)="close()" ></ion-icon>
 
     <div class="title">
       <p>{{title}}</p>
     </div>
-    <div class="photobox">
-      <img src="{{photo}}" alt="photo">
-    </div>
+
+    @if (QuestionI.img) {
+      <div class="photobox">
+        <img src="{{QuestionI.img}}" class="photo" alt="photo">
+      </div>
+    }@else{
+      <div class="photobox">
+        <img src="{{photo}}" class="photo" alt="photo">
+      </div>
+    }
 
     <div class="questionbox">
-
+      <ion-input [(ngModel)]="QuestionI.question" placeholder="Ingrese una pregunta"></ion-input>
     </div>
 
     <div class="answersbox">
 
+      <div class="forbox" *ngFor="let input of QuestionI.answers; let i = index; trackBy: trackByIndex">
+        <ion-input
+        [(ngModel)]="QuestionI.answers[i]" [placeholder]="i === 0 ? 'Ingrese respuesta correcta' : 'Ingrese respuesta Trampa ' + (i)">
+        </ion-input>
+      </div>
+
+      <div class="addbutton">
+        <ion-button (click)="addInput()" [disabled]="QuestionI.answers.length >= 4">Añadir respuesta</ion-button>
+      </div>
     </div>
-
+    
     <div class="buttonbox">
-
+      <ion-button (click)="submit()">
+        <p>{{buttontext}}</p>
+      </ion-button>
     </div>
 
   </div>

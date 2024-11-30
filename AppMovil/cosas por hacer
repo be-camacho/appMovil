@@ -3,15 +3,12 @@
 4 añadir contador de preguntas correctas/total animado 
 5 mensaje de logoro/fallo al seleccionar una respuesta 
 6 crear componente al finalizar la ronda de preguntas con estadisticas de la ronda (total de preguntas/preguntas buenas/tiempo total que se demoro/"pensar en mas opcional")
-
 7 diseñar el componente new question component desde 0 y conectarlo con la pagina de questions de manera correcta --------pioridad 
-
 8 diseñar la pagina de usuario
-
-10 conectar la api creada con mi aplicacion
 11 mandar mensajes al correo de el usaurio a travez de ionic "idea 1 (una bienvenida a nuestro nuevo usuario/a)"
 12 crear pagina web para descargar la aplicacion
 13 agregar error 404 a la aplicacion
+
 
 100% de la rubrica
 
@@ -22,3 +19,4 @@ listo :
 1 configurar el acceso a editar temas de estudio "completo" 20:10 13/11/2024
 2 hacer la conexion de subthemes con el componente add new document  "completo" 20:44 13/11/2024
 9 crear la api en github de con las frases motivacionales para la landing page 16:23 16/11/2024
+10 conectar la api creada con mi aplicacion

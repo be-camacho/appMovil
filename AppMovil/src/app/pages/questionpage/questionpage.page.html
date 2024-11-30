@@ -1,5 +1,16 @@
 <ion-content [fullscreen]="true">
   <app-animated-background></app-animated-background>
+  <div class="full" *ngIf="isActiveModal">
+    <app-addquestionmodal
+    [type]="type"
+    [isEdit]="editMode"
+    [QuestionI]="questionI"
+    [uid]="uid"
+    [tid]="tid"
+    [sid]="sid"
+    (closeModal)="closeModal()"
+    ></app-addquestionmodal>
+  </div>
   <div class="theme-container">
     <div class="theme-list-container">
       <div class="header">
@@ -15,7 +26,7 @@
             </ion-list>
       </div>
           <div class="button-group">
-            <ion-button class="icon-button" (click)="openAddQuestionModal()">
+            <ion-button class="icon-button" (click)="openModal()">
               <ion-icon name="add-circle-outline"></ion-icon>
             </ion-button>
             <ion-button class="icon-button" (click)="toggleEditMode()" [ngClass]="{'edit-mode-button': editMode}" class="icon-button">

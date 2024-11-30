@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Data, } from '@angular/router';
-import { ModalController } from '@ionic/angular';
 import { StudyThemeI } from 'src/app/models/studytheme.models';
 import { QuestionI } from 'src/app/models/questions.models';
 import { AuthService } from 'src/app/services/auth.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { SubthemeI } from 'src/app/models/subtheme.models';
-import { AddQuestionModalComponent } from 'src/app/components/addquestionmodal/addquestionmodal.component';
 import { SQLiteService } from 'src/app/services/SQLite.service';
 
 @Component({
@@ -25,12 +23,17 @@ export class QuestionpagePage implements OnInit {
   deletMode: boolean = false;
   selectedSubTheme: SubthemeI;
   selecteStudyTheme: StudyThemeI;
+  isActiveModal: boolean = false;
+  questionI: any = {};
+  uid: string;
+  tid: string;
+  sid: string;
+  type: string = "1";
 
   constructor(
     private route: ActivatedRoute,
     private authService: AuthService,
     private firebaseService: FirebaseService,
-    private modalController: ModalController,
     private sqliteService: SQLiteService
     ){
       
@@ -45,7 +48,9 @@ export class QuestionpagePage implements OnInit {
         this.selectedSubTheme = JSON.parse(params['subTheme']);
       }
     });
+    this.loadParameters();
   }
+
   async initializeDatabase() {
     await this.sqliteService.initializeDatabase();
   }
@@ -60,6 +65,11 @@ export class QuestionpagePage implements OnInit {
         this.questions = data;
       }
     });
+  }
+  async loadParameters() {
+    this.uid = (await this.authService.getProfile()).uid;
+    this.tid = this.selecteStudyTheme.id;
+    this.sid = this.selectedSubTheme.id;
   }
 
   async addQuestion(question: Data) {
@@ -102,38 +112,9 @@ export class QuestionpagePage implements OnInit {
       await this.sqliteService.addQuestionImage(updatedQuestion.id, updatedQuestion.imagecod); // Guardar en SQLite
     }
   }
-
-  async openAddQuestionModal() {
-    const modal = await this.modalController.create({
-      component: AddQuestionModalComponent,
-      componentProps: {
-        title: 'Crear una nueva Pregunta',
-        button: 'Crear'
-      }
-    });
-    modal.onDidDismiss().then((data) => {
-      if (data.data) {
-        this.addQuestion(data.data);
-      }
-    });
-    return await modal.present();
-  }
-
   async openEditQuestionModal(question: QuestionI) {
-    const modal = await this.modalController.create({
-      component: AddQuestionModalComponent,
-      componentProps: {
-        title: 'Editar Pregunta',
-        button: 'Guardar',
-        questionData: { ...question, questionType: question.type }
-      }
-    });
-    modal.onDidDismiss().then((data) => {
-      if (data.data) {
-        this.updateQuestion(question.id, data.data);
-      }
-    });
-    return await modal.present();
+    this.questionI = question;
+    this.isActiveModal = true;
   }
 
   async deleteQuestion(question: QuestionI) {
@@ -163,5 +144,11 @@ export class QuestionpagePage implements OnInit {
     if (this.deletMode) {
       this.editMode = false; // Desactiva el modo de edición si el modo de eliminación está activo
     }
+  }
+  async openModal() {
+    this.isActiveModal = true;
+  }
+  async closeModal() {
+    this.isActiveModal = false;
   }
 }
