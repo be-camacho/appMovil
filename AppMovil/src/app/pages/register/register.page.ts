@@ -5,6 +5,7 @@ import { LoadingController } from '@ionic/angular';
 import { UserI } from 'src/app/models/users.models';
 import { AuthService } from 'src/app/services/auth.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
+import { EmailService } from 'src/app/services/email.service';
 
 @Component({
   selector: 'app-register',
@@ -22,7 +23,8 @@ export class RegisterPage implements OnInit {
     private loadingCtrl: LoadingController,
     private authService: AuthService,
     private firesbaseservice: FirebaseService,
-    public router: Router
+    public router: Router,
+    private emailService: EmailService
   ) {}
 
   ngOnInit() {
@@ -69,6 +71,20 @@ export class RegisterPage implements OnInit {
           id: iud
         }
         this.firesbaseservice.createDocumentID(this.newUser, 'Users',this.newUser.id)//crea el usuario nuevo en la colección Users de firestore
+        const templateParams = {
+          to_name: this.regForm.value.name,
+          from_name: 'Twolingo',
+          message: 'Bienvenido a Twolingo, gracias por formar parte de nuestra comunidad',
+          to_email: this.regForm.value.email
+        };
+        this.emailService.sendEmail(templateParams).then(
+          (response) => {
+            console.log('SUCCESS!', response.status, response.text);
+          },
+          (error) => {
+            console.log('FAILED...', error);
+          }
+        );
         loading.dismiss()
         this.router.navigate(['/login'])
       }else{
@@ -77,4 +93,5 @@ export class RegisterPage implements OnInit {
       }
     }loading.dismiss()
   }
+  
 }
