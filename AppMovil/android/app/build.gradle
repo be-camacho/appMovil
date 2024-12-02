@@ -16,6 +16,15 @@ android {
             ignoreAssetsPattern '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
         }
     }
+    signingConfigs {
+        release {
+            keyAlias 'key0'
+            keyPassword 'Benja2209!'
+            storeFile file('keyTwolingo.jks')
+            storePassword 'Benja2209!'
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false

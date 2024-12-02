@@ -1,10 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
-import { AuthService } from 'src/app/services/auth.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
-import { SQLiteService } from 'src/app/services/SQLite.service';
 import { QuestionI } from 'src/app/models/questions.models';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-addquestionmodal',
@@ -19,7 +16,7 @@ export class AddQuestionModalComponent implements OnInit {
   question: string;
   answers: string[] = [];
   buttontext: string;
-  questionform: FormGroup;
+
 
   @Input() type: string;
   @Input() isEdit: boolean = false;
@@ -64,7 +61,7 @@ export class AddQuestionModalComponent implements OnInit {
   async takePhoto() {
     const image = await Camera.getPhoto({
       quality: 90,
-      allowEditing: true,
+      allowEditing: false,
       resultType: CameraResultType.Base64,
       source: CameraSource.Camera
     });
@@ -80,13 +77,10 @@ export class AddQuestionModalComponent implements OnInit {
       this.buttontext = 'Guardar cambios';
       if(this.QuestionI.imagecod){
         this.photo = this.QuestionI.imagecod;
-      }else{
-        this.photo = this.cameraImg;
       }
     }else{
       this.title = 'Crea una nueva pregunta';
       this.buttontext = 'Crear pregunta';
-      this.photo = this.cameraImg;
       this.initializeQuestion();
     }
   }

@@ -8,7 +8,7 @@
     </div>
    
       <div class="photobox">
-        <img src="{{photo}}" class="photo" alt="photo" (click)="takePhoto()">
+        <img class="photo" [src]="photo ? 'data:image/jpeg;base64,' + photo : cameraImg" alt="Captured Photo" (click)="takePhoto()">
       </div>
       
       <div class="questionbox">
