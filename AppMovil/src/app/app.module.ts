@@ -14,11 +14,9 @@ import { provideFirestore } from '@angular/fire/firestore';
 import { getFirestore } from 'firebase/firestore';
 import { initializeApp } from 'firebase/app';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AddQuestionModalComponent } from './components/addquestionmodal/addquestionmodal.component';
-import { SQLite } from '@ionic-native/sqlite/ngx'; // Importa SQLite
-import { SQLiteService } from './services/SQLite.service'; // Importa el servicio SQLite
+import { SQLite } from '@ionic-native/sqlite/ngx'; 
+import { SQLiteService } from './services/SQLite.service'; 
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-
 
 @NgModule({
   declarations: [

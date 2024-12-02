@@ -23,7 +23,7 @@
           </ion-input>
         </div>
 
-        <div class="addbutton">
+        <div class="addbutton" [class.hidden]="QuestionI.answers.length >= 4">
           <ion-button (click)="addInput()" [disabled]="QuestionI.answers.length >= 4">Añadir respuesta</ion-button>
         </div>
       </div>

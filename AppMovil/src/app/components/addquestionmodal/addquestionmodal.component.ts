@@ -9,7 +9,6 @@ import { QuestionI } from 'src/app/models/questions.models';
   styleUrls: ['./addquestionmodal.component.scss'],
 })
 export class AddQuestionModalComponent implements OnInit {
-
   title:string;
   cameraImg: string = "/assets/camera.png";
   photo: string;
@@ -26,9 +25,13 @@ export class AddQuestionModalComponent implements OnInit {
   @Input() sid: string;
   @Output() closeModal = new EventEmitter<void>();
   
-  constructor(private firebaseService: FirebaseService){}
-
+  constructor(
+    private firebaseService: FirebaseService,
+  ){}
+  
   ngOnInit() {
+    
+
     this.configs(); //inicializo las configuraciones
 
 
@@ -37,6 +40,7 @@ export class AddQuestionModalComponent implements OnInit {
     }
     console.log(this.QuestionI);
   }
+
 
   addInput() {
     if (this.QuestionI.answers.length < 4) {
